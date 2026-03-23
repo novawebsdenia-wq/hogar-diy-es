@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
+  // Añadir verificación GSC: verification: { google: 'XXXXXXXXXX' }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

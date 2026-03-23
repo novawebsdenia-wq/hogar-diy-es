@@ -1,4 +1,4 @@
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hogar-diy.es'
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hogardiy.es'
 export const SITE_NAME = 'HogarDIY.es'
 export const SITE_DESCRIPTION =
   'Guías paso a paso para reparaciones del hogar, bricolaje y herramientas. Ahorra dinero haciendo tú mismo las reparaciones más comunes.'
