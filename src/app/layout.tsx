@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import Link from "next/link";
+import Image from "next/image";
 import "@/styles/globals.css";
 import {
   SITE_NAME,
@@ -32,6 +33,10 @@ export const metadata: Metadata = {
   publisher: "HogarDIY.es",
   category: "home improvement",
   alternates: { canonical: SITE_URL },
+  icons: {
+    icon: "/images/logo-icon.jpg",
+    apple: "/images/logo-icon.jpg",
+  },
   openGraph: {
     type: "website",
     locale: "es_ES",
@@ -73,42 +78,35 @@ export default function RootLayout({
           />
         )}
 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: SITE_NAME,
+              url: SITE_URL,
+              logo: `${SITE_URL}/images/logo-icon.jpg`,
+              sameAs: [
+                "https://pinterest.es/hogardiy",
+                "https://youtube.com/@hogardiy",
+              ],
+            }),
+          }}
+        />
+
         {/* Header */}
         <header className="sticky top-0 z-50 bg-[#0f3d26] shadow-lg">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 relative">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0">
-              <svg
-                viewBox="0 0 100 100"
-                width="36"
-                height="36"
-                xmlns="http://www.w3.org/2000/svg"
-                className="shrink-0 rounded-xl"
-                aria-hidden="true"
-              >
-                <rect width="100" height="100" rx="16" fill="#f2f0eb" />
-                <path
-                  d="M50,16 L86,47 L86,88 Q86,92 82,92 L18,92 Q14,92 14,88 L14,47 Z"
-                  fill="#1c5c3a"
-                />
-                <rect
-                  x="68"
-                  y="30"
-                  width="8"
-                  height="20"
-                  rx="1"
-                  fill="#0d3020"
-                />
-                <path
-                  d="M64,10 L64,28 Q64,35 72,35 Q80,35 80,28 L80,10 L76,10 L76,26 Q76,31 72,31 Q68,31 68,26 L68,10 Z"
-                  fill="#f59e0b"
-                />
-                <path
-                  d="M42,92 L42,68 Q42,57 50,57 Q58,57 58,68 L58,92 Z"
-                  fill="#f59e0b"
-                />
-                <circle cx="44.5" cy="76" r="2" fill="#0d3020" />
-              </svg>
+              <Image
+                src="/images/logo-icon.jpg"
+                alt="HogarDIY.es"
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-xl object-cover"
+              />
               <div className="leading-tight">
                 <p className="text-base font-extrabold tracking-tight text-white">
                   HogarDIY.es
@@ -171,37 +169,13 @@ export default function RootLayout({
               {/* Brand */}
               <div className="md:col-span-1">
                 <div className="mb-4 flex items-center gap-2.5">
-                  <svg
-                    viewBox="0 0 100 100"
-                    width="36"
-                    height="36"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="shrink-0 rounded-xl"
-                    aria-hidden="true"
-                  >
-                    <rect width="100" height="100" rx="16" fill="#f2f0eb" />
-                    <path
-                      d="M50,16 L86,47 L86,88 Q86,92 82,92 L18,92 Q14,92 14,88 L14,47 Z"
-                      fill="#1c5c3a"
-                    />
-                    <rect
-                      x="68"
-                      y="30"
-                      width="8"
-                      height="20"
-                      rx="1"
-                      fill="#0d3020"
-                    />
-                    <path
-                      d="M64,10 L64,28 Q64,35 72,35 Q80,35 80,28 L80,10 L76,10 L76,26 Q76,31 72,31 Q68,31 68,26 L68,10 Z"
-                      fill="#f59e0b"
-                    />
-                    <path
-                      d="M42,92 L42,68 Q42,57 50,57 Q58,57 58,68 L58,92 Z"
-                      fill="#f59e0b"
-                    />
-                    <circle cx="44.5" cy="76" r="2" fill="#0d3020" />
-                  </svg>
+                  <Image
+                    src="/images/logo-icon.jpg"
+                    alt="HogarDIY.es"
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 rounded-xl object-cover"
+                  />
                   <p className="text-lg font-extrabold">HogarDIY.es</p>
                 </div>
                 <p className="text-sm leading-relaxed text-white/60">
