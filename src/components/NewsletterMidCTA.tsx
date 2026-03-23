@@ -1,35 +1,39 @@
-'use client'
+"use client";
 
-import { useState, type FormEvent } from 'react'
+import { useState, type FormEvent } from "react";
 
 export function NewsletterMidCTA() {
-  const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
 
   async function handleSubmit(e: FormEvent) {
-    e.preventDefault()
-    setStatus('loading')
+    e.preventDefault();
+    setStatus("loading");
     try {
-      const res = await fetch('/api/newsletter/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
-      })
-      if (!res.ok) throw new Error()
-      setStatus('success')
-      setEmail('')
+      });
+      if (!res.ok) throw new Error();
+      setStatus("success");
+      setEmail("");
     } catch {
-      setStatus('error')
+      setStatus("error");
     }
   }
 
-  if (status === 'success') {
+  if (status === "success") {
     return (
       <div className="my-10 rounded-2xl border border-green-200 bg-green-50 p-6 text-center">
         <p className="text-2xl">✓</p>
-        <p className="mt-2 font-bold text-green-800">¡Apuntado! Te enviaremos la próxima guía.</p>
+        <p className="mt-2 font-bold text-green-800">
+          ¡Apuntado! Te enviaremos la próxima guía.
+        </p>
       </div>
-    )
+    );
   }
 
   return (
@@ -47,7 +51,10 @@ export function NewsletterMidCTA() {
             Sin spam. Solo cuando publiquemos algo útil.
           </p>
         </div>
-        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+        <form
+          onSubmit={handleSubmit}
+          className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row"
+        >
           <input
             type="email"
             required
@@ -58,16 +65,16 @@ export function NewsletterMidCTA() {
           />
           <button
             type="submit"
-            disabled={status === 'loading'}
+            disabled={status === "loading"}
             className="rounded-xl bg-amber-500 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-amber-600 disabled:opacity-60 whitespace-nowrap"
           >
-            {status === 'loading' ? '...' : 'Suscribirme'}
+            {status === "loading" ? "..." : "Suscribirme"}
           </button>
         </form>
-        {status === 'error' && (
+        {status === "error" && (
           <p className="text-xs text-red-300">Error. Inténtalo de nuevo.</p>
         )}
       </div>
     </div>
-  )
+  );
 }

@@ -1,22 +1,22 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 export function HeroVideoSection() {
   return (
     <div className="relative h-[90svh] min-h-[600px] w-full overflow-hidden bg-black">
       <div className="absolute inset-0 h-full w-full">
         {/* Video Nativo HTML5: Rendimiento máximo a 60 FPS independientemente del dispositivo */}
-        <video 
-          src="/hero-video.mp4" 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
+        <video
+          src="/hero-video.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
           className="absolute inset-0 h-full w-full object-cover opacity-80"
         />
 
         {/* Overlay izquierda→derecha para legibilidad del texto */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d26]/95 via-[#0f3d26]/70 to-[#0f3d26]/20" />
-        
+
         {/* Fade inferior hacia la siguiente sección */}
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0f3d26] to-transparent" />
 
@@ -28,14 +28,16 @@ export function HeroVideoSection() {
                 🔧 Guías gratuitas de bricolaje
               </span>
               <h1 className="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
-                Repara tu hogar<br />
+                Repara tu hogar
+                <br />
                 <span className="text-amber-400">sin llamar al técnico</span>
               </h1>
               <p className="mb-8 text-lg leading-relaxed text-white/70">
-                Guías paso a paso con fotos reales para fontanería, electricidad, herramientas y reformas.
-                Ahorra cientos de euros al año haciéndolo tú mismo.
+                Guías paso a paso con fotos reales para fontanería,
+                electricidad, herramientas y reformas. Ahorra cientos de euros
+                al año haciéndolo tú mismo.
               </p>
-              
+
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/reparaciones"
@@ -53,12 +55,14 @@ export function HeroVideoSection() {
 
               <div className="mt-10 flex flex-wrap gap-6 border-t border-white/10 pt-8">
                 {[
-                  { n: '25+', label: 'Guías gratuitas' },
-                  { n: '300€', label: 'Ahorro medio/reparación' },
-                  { n: '0€', label: 'Sin registro' },
+                  { n: "25+", label: "Guías gratuitas" },
+                  { n: "300€", label: "Ahorro medio/reparación" },
+                  { n: "0€", label: "Sin registro" },
                 ].map(({ n, label }) => (
                   <div key={label}>
-                    <p className="text-2xl font-extrabold text-amber-400">{n}</p>
+                    <p className="text-2xl font-extrabold text-amber-400">
+                      {n}
+                    </p>
                     <p className="text-sm text-white/50">{label}</p>
                   </div>
                 ))}
@@ -68,5 +72,5 @@ export function HeroVideoSection() {
         </div>
       </div>
     </div>
-  )
+  );
 }

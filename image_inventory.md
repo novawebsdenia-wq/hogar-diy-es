@@ -1,6 +1,7 @@
 # Inventario de Imágenes - Hogar DIY
 
 ## Ahorro Energético (5 artículos)
+
 1. **Aislar puerta entrada**: `image: "https://images.unsplash.com..."` -> **EXTERNAL (Needs AI Image)**
 2. **Bombillas LED**: `image: "/images/posts/ahorro-energetico/mejorar-aislamiento-ventanas.webp"` -> **INCORRECT (Points to windows image)**
 3. **Programar termostato**: `image: "https://images.unsplash.com..."` -> **EXTERNAL (Needs AI Image)**
@@ -8,6 +9,7 @@
 5. **Purgar radiadores**: `image: "https://images.unsplash.com..."` -> **EXTERNAL (Needs AI Image)**
 
 ## Jardín (5 artículos)
+
 1. **Cortar césped**: `image: "https://images.unsplash.com..."` -> **EXTERNAL (Uses same Unsplash as Persiana article!)**
 2. **Montar jardinera**: `image: "/images/jardin/como-montar-jardinera-exterior/cover.jpg"` -> **MISSING/EXTERNAL**
 3. **Riego por goteo**: `image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b..."` -> **DUPLICATE (Same as Herramientas Jardinería)**
@@ -15,11 +17,13 @@
 5. **Riego automático casero**: `image: "/images/posts/jardin/riego-automatico-casero.webp"` -> **OK**
 
 ## Reformas (3 artículos)
+
 1. **Instalar suelo vinílico**: `image: "/images/posts/reformas/como-instalar-suelo-vinilico.webp"` -> **OK**
 2. **Pintar habitación**: `image: "/images/posts/reformas/como-pintar-habitacion-paso-a-paso.webp"` -> **OK**
 3. **Restaurar muebles**: `image: "https://images.unsplash.com..."` -> **EXTERNAL (Needs AI Image)**
 
 ## Herramientas (6 artículos)
+
 1. **Mantener herramientas**: `image: "/images/herramientas/como-mantener-herramientas-buen-estado/cover.jpg"` -> **EXTERNAL**
 2. **Herramientas básicas hogar**: `image: "/images/posts/herramientas/caja-herramientas-basica.webp"` -> **OK**
 3. **Herramientas esenciales inquilinos**: `image: "/images/herramientas/herramientas-esenciales-inquilinos/cover.jpg"` -> **EXTERNAL**
@@ -28,6 +32,7 @@
 6. **Taladro percutor vs atornillador**: `image: "https://images.unsplash.com..."` -> **EXTERNAL**
 
 ## Reparaciones (13 artículos)
+
 1. **Arreglar baldosas**: `image: "/images/posts/reparaciones/como-arreglar-baldosas-sueltas.webp"` -> **OK**
 2. **Arreglar cisterna**: `image: "/images/posts/reparaciones/como-arreglar-cisterna-que-pierde-agua.webp"` -> **OK**
 3. **Arreglar interruptor**: `image: "/images/posts/reparaciones/como-arreglar-interruptor-luz.webp"` -> **OK**

@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { CATEGORIES } from '@/lib/constants'
+import { useState } from "react";
+import Link from "next/link";
+import { CATEGORIES } from "@/lib/constants";
 
 export function MobileMenu() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -15,11 +15,25 @@ export function MobileMenu() {
         aria-label="Menú"
       >
         {open ? (
-          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <svg
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
             <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
           </svg>
         ) : (
-          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <svg
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
             <path d="M3 12h18M3 6h18M3 18h18" strokeLinecap="round" />
           </svg>
         )}
@@ -52,5 +66,5 @@ export function MobileMenu() {
         </div>
       )}
     </>
-  )
+  );
 }

@@ -1,14 +1,15 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 const articles = [
   // --- AHORRO ENERGÉTICO ---
   {
-    category: 'ahorro-energetico',
-    slug: 'como-aislar-caja-persiana-frio',
-    title: 'Cómo aislar la caja de la persiana para que no entre frío',
-    description: 'El tambor de la persiana es el mayor agujero térmico de tu casa. Aprende a aislarlo por menos de 15€ y ahorra un 15% en calefacción.',
-    date: '2026-03-23',
+    category: "ahorro-energetico",
+    slug: "como-aislar-caja-persiana-frio",
+    title: "Cómo aislar la caja de la persiana para que no entre frío",
+    description:
+      "El tambor de la persiana es el mayor agujero térmico de tu casa. Aprende a aislarlo por menos de 15€ y ahorra un 15% en calefacción.",
+    date: "2026-03-23",
     readingTime: 6,
     tags: "['aislamiento', 'invierno', 'ventanas']",
     content: `El tambor o caja de la persiana es, literalmente, un agujero en la fachada de tu casa. Por ahí se escapa el calor en invierno y entra el aire gélido de la calle. Yo me he encontrado casas con ventanas de PVC de triple cristal que seguían heladas porque el instalador no aisló el tambor.
@@ -53,14 +54,15 @@ Sí, pero es mucho menos flexible. Cuesta meterlo en la forma curva del tambor y
 
 **¿Qué pasa si entra agua en el tambor?**
 Los paneles aislantes de caja de persiana (Neopor, EPS) son hidrófugos. No absorben la humedad, por lo que no crearán moho negro.
-`
+`,
   },
   {
-    category: 'ahorro-energetico',
-    slug: 'como-poner-paneles-reflectantes-radiadores',
-    title: 'Paneles reflectantes para radiadores: Ahorro de un 10%',
-    description: 'Evita perder el calor de tus radiadores hacia la fachada instalando paneles reflectantes de aluminio. Fácil, barato e invisible.',
-    date: '2026-03-24',
+    category: "ahorro-energetico",
+    slug: "como-poner-paneles-reflectantes-radiadores",
+    title: "Paneles reflectantes para radiadores: Ahorro de un 10%",
+    description:
+      "Evita perder el calor de tus radiadores hacia la fachada instalando paneles reflectantes de aluminio. Fácil, barato e invisible.",
+    date: "2026-03-24",
     readingTime: 4,
     tags: "['calefacción', 'aislamiento']",
     content: `El principio térmico de tu radiador es simple: calienta todo lo que le rodea. El problema es que el 50% de ese calor "apunta" hacia la pared, no hacia el centro de la habitación. Si esa pared da al exterior (fachada), estás enviando tus euros en gas a la calle.
@@ -96,14 +98,15 @@ Es el truco clásico de la abuela, y técnicamente "funciona", pero el papel de 
 
 **¿Vale la pena en paredes interiores?**
 Solo sirve (y es útil) en radiadores ubicados en paredes que dan a la fachada de la calle, que no están aislados con rotura de puente térmico en el tabique.
-`
+`,
   },
   {
-    category: 'reparaciones',
-    slug: 'reparar-juntas-silicona-banera-ennegrecida',
-    title: 'Cómo cambiar la silicona de la bañera o plato de ducha',
-    description: 'Acaba con el moho negro en las juntas de silicona de tu baño de una vez por todas eliminando la vieja y aplicando una nueva perfecta.',
-    date: '2026-03-25',
+    category: "reparaciones",
+    slug: "reparar-juntas-silicona-banera-ennegrecida",
+    title: "Cómo cambiar la silicona de la bañera o plato de ducha",
+    description:
+      "Acaba con el moho negro en las juntas de silicona de tu baño de una vez por todas eliminando la vieja y aplicando una nueva perfecta.",
+    date: "2026-03-25",
     readingTime: 6,
     tags: "['baño', 'fontanería', 'estética']",
     content: `Casi el 100% de las fugas de agua lentas hacia el piso del vecino de abajo provienen de una pequeña raja imperceptible en la silicona de la bañera. Además, el moho negro que se forma es antiestético y peligroso para la salud.
@@ -151,14 +154,15 @@ Asegúrate fervientemente de secar la bañera, echar lejía o limpia-juntas, mat
 
 **¿Dedo mojado o espátula de goma para alisar?**
 Una espátula niveladora cuesta 3€ y es más fácil si nunca lo has hecho. Pero honestamente, si sabes calcular la dosis de agua y jabón, el dedo deja el recorrido más natural del mundo para mi gusto.
-`
+`,
   },
   {
-    category: 'reparaciones',
-    slug: 'como-limpiar-filtro-lavadora-no-desagua',
-    title: 'Qué hacer si la lavadora no desagua: Limpiar el filtro',
-    description: 'Si la lavadora para a mitad de lavado y el tambor está lleno de agua, en el 95% de los casos es este fallo. Solución en 5 minutos.',
-    date: '2026-03-26',
+    category: "reparaciones",
+    slug: "como-limpiar-filtro-lavadora-no-desagua",
+    title: "Qué hacer si la lavadora no desagua: Limpiar el filtro",
+    description:
+      "Si la lavadora para a mitad de lavado y el tambor está lleno de agua, en el 95% de los casos es este fallo. Solución en 5 minutos.",
+    date: "2026-03-26",
     readingTime: 4,
     tags: "['electrodomésticos', 'fontanería']",
     content: `La llamada más común a un fontanero o servicio de mantenimiento electrodoméstico es: *"Mi lavadora se ha parado pitando, está llena de ropa empapada, el tambor lleno de espuma, el tambor cerrado y no saca todo el agua ni hace el centrifugado"*. 
@@ -199,14 +203,15 @@ Usa los alicates de pato, o muerde la pieza para desenroscar fuerte, el sediment
 
 **Mi lavadora no tiene trampilla delantera de desagüe inferior.**
 Si tienes una lavadora de carga superior exótica o americana extra, en general el sistema es idéntico pero se retira desde atrás desmontando 3 tornillos del panel de lata para exponer la bomba o bien dentro de una pala al lado del tambor, consulta tu marca en Google añadiendo *“bomba ubicación”*.
-`
+`,
   },
   {
-    category: 'reformas',
-    slug: 'como-purgar-caldera-gas-presion',
-    title: 'Cómo purgar la caldera de gas y subir la presión de 0 a 1.5 Bar',
-    description: 'Si tu calefacción no arranca en invierno, revisar la presión y purgarla tú mismo te evitará quedarte congelado esperando al SAT térmico.',
-    date: '2026-03-27',
+    category: "reformas",
+    slug: "como-purgar-caldera-gas-presion",
+    title: "Cómo purgar la caldera de gas y subir la presión de 0 a 1.5 Bar",
+    description:
+      "Si tu calefacción no arranca en invierno, revisar la presión y purgarla tú mismo te evitará quedarte congelado esperando al SAT térmico.",
+    date: "2026-03-27",
     readingTime: 5,
     tags: "['calefacción', 'fontanería']",
     content: `A veces el display o manómetro analógico del dispositivo en un balcón se encuentra pegando bajones de presión hasta 0.5 Bar y, automáticamente, el calentador marca "Error E-10, H0 o baja carga" deteniendo el circuito entero caliente de radiadores porque requiere 1.5 bar de aire líquido interno. 
@@ -239,16 +244,23 @@ No explota nada. Todo el equipo de gas general doméstico en toda Europa de form
 
 **Cada 2 semanas tengo que llenarla girando ¿A qué se debe esto?**
 Tienes una pequeña y miserable fuga estancada de agua debajo del suelo falso, tras la escayola, o muy diminuta bajo el panel superior de techo goteando del grifo. O peor, la cámara vaso de expansión dentro de caldera perido estanqueidad y el SAT tendrá que intervenir por +160€. Consúltalo.
-`
-  }
+`,
+  },
 ];
 
-if (!fs.existsSync('./content/ahorro-energetico')) fs.mkdirSync('./content/ahorro-energetico', { recursive: true });
-if (!fs.existsSync('./content/reparaciones')) fs.mkdirSync('./content/reparaciones', { recursive: true });
-if (!fs.existsSync('./content/reformas')) fs.mkdirSync('./content/reformas', { recursive: true });
+if (!fs.existsSync("./content/ahorro-energetico"))
+  fs.mkdirSync("./content/ahorro-energetico", { recursive: true });
+if (!fs.existsSync("./content/reparaciones"))
+  fs.mkdirSync("./content/reparaciones", { recursive: true });
+if (!fs.existsSync("./content/reformas"))
+  fs.mkdirSync("./content/reformas", { recursive: true });
 
-articles.forEach(article => {
-  const filePath = path.join('./content', article.category, article.slug + '.mdx');
+articles.forEach((article) => {
+  const filePath = path.join(
+    "./content",
+    article.category,
+    article.slug + ".mdx",
+  );
   const fileContent = `---
 title: "${article.title}"
 description: "${article.description}"
@@ -263,4 +275,4 @@ ${article.content}
   fs.writeFileSync(filePath, fileContent);
 });
 
-console.log('Done mapping 5 critical guide MDXs for rapid indexing scaling.');
+console.log("Done mapping 5 critical guide MDXs for rapid indexing scaling.");

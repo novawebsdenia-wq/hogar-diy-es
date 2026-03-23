@@ -1,51 +1,51 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { AUTHORS, getAuthor } from '@/lib/authors'
-import { getAllArticles } from '@/lib/mdx'
-import { SITE_NAME, SITE_URL } from '@/lib/constants'
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { AUTHORS, getAuthor } from "@/lib/authors";
+import { getAllArticles } from "@/lib/mdx";
+import { SITE_NAME, SITE_URL } from "@/lib/constants";
 
 interface Props {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
-  return Object.keys(AUTHORS).map((slug) => ({ slug }))
+  return Object.keys(AUTHORS).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const author = getAuthor(slug)
-  if (!author) return {}
+  const { slug } = await params;
+  const author = getAuthor(slug);
+  if (!author) return {};
   return {
     title: `${author.name} — ${author.title} | ${SITE_NAME}`,
     description: author.bio,
     openGraph: {
-      type: 'profile',
+      type: "profile",
       url: `${SITE_URL}/autor/${slug}`,
     },
-  }
+  };
 }
 
 export default async function AutorPage({ params }: Props) {
-  const { slug } = await params
-  const author = getAuthor(slug)
-  if (!author) notFound()
+  const { slug } = await params;
+  const author = getAuthor(slug);
+  if (!author) notFound();
 
-  const allArticles = getAllArticles()
+  const allArticles = getAllArticles();
   const authorArticles = allArticles.filter(
-    (a) => a.author === author.name || a.author === author.slug
-  )
+    (a) => a.author === author.name || a.author === author.slug,
+  );
 
   const authorSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
+    "@context": "https://schema.org",
+    "@type": "Person",
     name: author.name,
     jobTitle: author.title,
     description: author.bio,
     url: `${SITE_URL}/autor/${slug}`,
-    worksFor: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-  }
+    worksFor: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+  };
 
   return (
     <>
@@ -58,7 +58,9 @@ export default async function AutorPage({ params }: Props) {
       <div className="bg-[#0f3d26] py-14 text-white">
         <div className="mx-auto max-w-4xl px-4">
           <nav className="mb-6 text-sm text-white/40">
-            <Link href="/" className="hover:text-white">Inicio</Link>
+            <Link href="/" className="hover:text-white">
+              Inicio
+            </Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">Autor</span>
           </nav>
@@ -76,9 +78,13 @@ export default async function AutorPage({ params }: Props) {
               <p className="mb-1 text-xs font-bold uppercase tracking-widest text-amber-400">
                 Autor
               </p>
-              <h1 className="text-3xl font-extrabold tracking-tight">{author.name}</h1>
+              <h1 className="text-3xl font-extrabold tracking-tight">
+                {author.name}
+              </h1>
               <p className="mt-1 text-lg text-amber-300">{author.title}</p>
-              <p className="mt-3 max-w-2xl text-white/70 leading-relaxed">{author.bio}</p>
+              <p className="mt-3 max-w-2xl text-white/70 leading-relaxed">
+                {author.bio}
+              </p>
             </div>
           </div>
         </div>
@@ -87,10 +93,15 @@ export default async function AutorPage({ params }: Props) {
       <div className="mx-auto max-w-4xl px-4 py-12">
         {/* Credenciales */}
         <section className="mb-12 rounded-2xl border border-green-100 bg-green-50 p-6">
-          <h2 className="mb-4 text-lg font-extrabold text-[#0f3d26]">Formación y experiencia</h2>
+          <h2 className="mb-4 text-lg font-extrabold text-[#0f3d26]">
+            Formación y experiencia
+          </h2>
           <ul className="space-y-2">
             {author.credentials.map((c) => (
-              <li key={c} className="flex items-start gap-2 text-sm text-gray-700">
+              <li
+                key={c}
+                className="flex items-start gap-2 text-sm text-gray-700"
+              >
                 <span className="mt-0.5 text-green-600">✓</span>
                 {c}
               </li>
@@ -120,7 +131,9 @@ export default async function AutorPage({ params }: Props) {
                   <p className="font-extrabold text-gray-900 group-hover:text-[#1a6640] leading-snug">
                     {article.title}
                   </p>
-                  <p className="mt-2 text-xs text-amber-600">⏱ {article.readingTime} min →</p>
+                  <p className="mt-2 text-xs text-amber-600">
+                    ⏱ {article.readingTime} min →
+                  </p>
                 </Link>
               ))}
             </div>
@@ -128,5 +141,5 @@ export default async function AutorPage({ params }: Props) {
         )}
       </div>
     </>
-  )
+  );
 }

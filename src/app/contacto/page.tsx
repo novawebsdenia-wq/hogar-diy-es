@@ -1,17 +1,19 @@
-import type { Metadata } from 'next'
-import { SITE_NAME } from '@/lib/constants'
+import type { Metadata } from "next";
+import { SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: `Contacto | ${SITE_NAME}`,
-  description: '¿Tienes alguna pregunta o sugerencia? Ponte en contacto con el equipo de HogarDIY.es.',
-}
+  description:
+    "¿Tienes alguna pregunta o sugerencia? Ponte en contacto con el equipo de HogarDIY.es.",
+};
 
 export default function ContactoPage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
       <h1 className="mb-3 text-3xl font-extrabold text-gray-900">Contacto</h1>
       <p className="mb-8 text-gray-500">
-        ¿Tienes alguna duda, sugerencia o quieres que tratemos un tema concreto? Escríbenos.
+        ¿Tienes alguna duda, sugerencia o quieres que tratemos un tema concreto?
+        Escríbenos.
       </p>
 
       <form
@@ -19,12 +21,19 @@ export default function ContactoPage() {
         method="POST"
         className="flex flex-col gap-4"
       >
-        <input type="hidden" name="_subject" value="Mensaje desde HogarDIY.es" />
+        <input
+          type="hidden"
+          name="_subject"
+          value="Mensaje desde HogarDIY.es"
+        />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_next" value="/contacto?enviado=true" />
 
         <div>
-          <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="name"
+            className="mb-1.5 block text-sm font-medium text-gray-700"
+          >
             Nombre
           </label>
           <input
@@ -38,7 +47,10 @@ export default function ContactoPage() {
         </div>
 
         <div>
-          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="email"
+            className="mb-1.5 block text-sm font-medium text-gray-700"
+          >
             Email
           </label>
           <input
@@ -52,7 +64,10 @@ export default function ContactoPage() {
         </div>
 
         <div>
-          <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="message"
+            className="mb-1.5 block text-sm font-medium text-gray-700"
+          >
             Mensaje
           </label>
           <textarea
@@ -73,5 +88,5 @@ export default function ContactoPage() {
         </button>
       </form>
     </div>
-  )
+  );
 }

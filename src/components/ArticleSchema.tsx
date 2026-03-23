@@ -1,60 +1,62 @@
-import type { ArticleMeta } from '@/lib/mdx'
-import { SITE_URL, SITE_NAME } from '@/lib/constants'
+import type { ArticleMeta } from "@/lib/mdx";
+import { SITE_URL, SITE_NAME } from "@/lib/constants";
 
 interface Props {
-  article: ArticleMeta
-  isHowTo?: boolean
-  faqs?: Array<{ question: string; answer: string }>
+  article: ArticleMeta;
+  isHowTo?: boolean;
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
 export function ArticleSchema({ article, isHowTo, faqs }: Props) {
   const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
+    "@context": "https://schema.org",
+    "@type": "Article",
     headline: article.title,
     description: article.description,
-    image: article.image ? `${SITE_URL}${article.image}` : `${SITE_URL}/og/default.jpg`,
+    image: article.image
+      ? `${SITE_URL}${article.image}`
+      : `${SITE_URL}/og/default.jpg`,
     datePublished: article.date,
     dateModified: article.updated ?? article.date,
     author: {
-      '@type': 'Person',
+      "@type": "Person",
       name: article.author,
     },
     publisher: {
-      '@type': 'Organization',
+      "@type": "Organization",
       name: SITE_NAME,
       url: SITE_URL,
     },
     mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${SITE_URL}/${article.category}/${article.slug}`,
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/${article.category}/${article.slug}`,
     },
-  }
+  };
 
   const howToSchema = isHowTo
     ? {
-        '@context': 'https://schema.org',
-        '@type': 'HowTo',
+        "@context": "https://schema.org",
+        "@type": "HowTo",
         name: article.title,
         description: article.description,
         image: article.image ? `${SITE_URL}${article.image}` : undefined,
       }
-    : null
+    : null;
 
   const faqSchema =
     faqs && faqs.length > 0
       ? {
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
           mainEntity: faqs.map((faq) => ({
-            '@type': 'Question',
+            "@type": "Question",
             name: faq.question,
-            acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+            acceptedAnswer: { "@type": "Answer", text: faq.answer },
           })),
         }
-      : null
+      : null;
 
-  const schemas = [articleSchema, howToSchema, faqSchema].filter(Boolean)
+  const schemas = [articleSchema, howToSchema, faqSchema].filter(Boolean);
 
   return (
     <>
@@ -66,5 +68,5 @@ export function ArticleSchema({ article, isHowTo, faqs }: Props) {
         />
       ))}
     </>
-  )
+  );
 }

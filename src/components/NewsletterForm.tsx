@@ -1,49 +1,52 @@
-'use client'
+"use client";
 
-import { useState, type FormEvent } from 'react'
+import { useState, type FormEvent } from "react";
 
-type Status = 'idle' | 'loading' | 'success' | 'error'
+type Status = "idle" | "loading" | "success" | "error";
 
 export function NewsletterForm() {
-  const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<Status>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   async function handleSubmit(e: FormEvent) {
-    e.preventDefault()
-    setStatus('loading')
-    setErrorMsg('')
+    e.preventDefault();
+    setStatus("loading");
+    setErrorMsg("");
 
     try {
-      const res = await fetch('/api/newsletter/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
-      })
+      });
 
       if (!res.ok) {
-        const data = await res.json()
-        throw new Error(data.error ?? 'Error al suscribirse')
+        const data = await res.json();
+        throw new Error(data.error ?? "Error al suscribirse");
       }
 
-      setStatus('success')
-      setEmail('')
+      setStatus("success");
+      setEmail("");
     } catch (err) {
-      setStatus('error')
-      setErrorMsg(err instanceof Error ? err.message : 'Error inesperado')
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "Error inesperado");
     }
   }
 
-  if (status === 'success') {
+  if (status === "success") {
     return (
       <p className="rounded-xl bg-white/10 px-6 py-4 text-sm font-medium text-amber-300">
         ✓ ¡Apuntado! Te avisaremos cuando publiquemos nuevas guías.
       </p>
-    )
+    );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row sm:gap-2">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-3 sm:flex-row sm:gap-2"
+    >
       <input
         type="email"
         required
@@ -54,14 +57,14 @@ export function NewsletterForm() {
       />
       <button
         type="submit"
-        disabled={status === 'loading'}
+        disabled={status === "loading"}
         className="rounded-xl bg-amber-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-amber-900/30 transition-colors hover:bg-amber-600 disabled:opacity-60"
       >
-        {status === 'loading' ? 'Enviando...' : 'Suscribirme'}
+        {status === "loading" ? "Enviando..." : "Suscribirme"}
       </button>
-      {status === 'error' && (
+      {status === "error" && (
         <p className="text-xs text-red-300 sm:hidden">{errorMsg}</p>
       )}
     </form>
-  )
+  );
 }
