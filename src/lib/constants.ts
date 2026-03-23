@@ -1,7 +1,7 @@
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hogardiy.es'
 export const SITE_NAME = 'HogarDIY.es'
 export const SITE_DESCRIPTION =
-  'Guías paso a paso para reparaciones del hogar, bricolaje y herramientas. Ahorra dinero haciendo tú mismo las reparaciones más comunes.'
+  'Ahorra cientos de euros arreglando tu casa tú mismo. Descubre guías paso a paso de bricolaje, tutoriales fáciles y herramientas imprescindibles. ¡Empieza hoy!'
 export const SITE_AUTHOR = 'HogarDIY.es'
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID ?? ''
 export const ADSENSE_PUBLISHER_ID = process.env.NEXT_PUBLIC_ADSENSE_ID ?? ''
