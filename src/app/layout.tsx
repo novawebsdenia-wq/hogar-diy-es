@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import Link from "next/link";
+import Image from "next/image";
 import "@/styles/globals.css";
 import {
   SITE_NAME,
@@ -78,9 +79,13 @@ export default function RootLayout({
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 relative">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#0a2e16] border border-white/10 text-xl shadow-inner">
-                🔧
-              </span>
+              <Image
+                src="/images/logo-icon.jpg"
+                alt="HogarDIY.es"
+                width={36}
+                height={36}
+                className="h-9 w-9 rounded-xl object-cover shadow-inner"
+              />
               <div className="leading-tight">
                 <p className="text-base font-extrabold tracking-tight text-white">
                   HogarDIY.es
@@ -143,9 +148,13 @@ export default function RootLayout({
               {/* Brand */}
               <div className="md:col-span-1">
                 <div className="mb-4 flex items-center gap-2.5">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#0a2e16] border border-white/10 text-xl shadow-inner">
-                    🔧
-                  </span>
+                  <Image
+                    src="/images/logo-icon.jpg"
+                    alt="HogarDIY.es"
+                    width={36}
+                    height={36}
+                    className="h-9 w-9 rounded-xl object-cover shadow-inner"
+                  />
                   <p className="text-lg font-extrabold">HogarDIY.es</p>
                 </div>
                 <p className="text-sm leading-relaxed text-white/60">
