@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import Link from "next/link";
-import Image from "next/image";
 import "@/styles/globals.css";
 import {
   SITE_NAME,
@@ -79,13 +78,50 @@ export default function RootLayout({
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 relative">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0">
-              <Image
-                src="/images/logo-icon.jpg"
-                alt="HogarDIY.es"
-                width={36}
-                height={36}
-                className="h-9 w-9 rounded-xl object-cover shadow-inner"
-              />
+              <svg
+                viewBox="0 0 36 36"
+                width="36"
+                height="36"
+                xmlns="http://www.w3.org/2000/svg"
+                className="shrink-0 rounded-xl"
+                aria-hidden="true"
+              >
+                <rect width="36" height="36" rx="8" fill="#0a2e16" />
+                <polygon points="18,6 30,19 6,19" fill="#f59e0b" />
+                <rect
+                  x="9"
+                  y="19"
+                  width="18"
+                  height="11"
+                  rx="1"
+                  fill="#f59e0b"
+                />
+                <rect
+                  x="14"
+                  y="22"
+                  width="8"
+                  height="8"
+                  rx="1"
+                  fill="#0a2e16"
+                />
+                <circle
+                  cx="26"
+                  cy="11"
+                  r="3"
+                  fill="none"
+                  stroke="#f59e0b"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="28.1"
+                  y1="13.1"
+                  x2="31"
+                  y2="16"
+                  stroke="#f59e0b"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
               <div className="leading-tight">
                 <p className="text-base font-extrabold tracking-tight text-white">
                   HogarDIY.es
@@ -148,13 +184,50 @@ export default function RootLayout({
               {/* Brand */}
               <div className="md:col-span-1">
                 <div className="mb-4 flex items-center gap-2.5">
-                  <Image
-                    src="/images/logo-icon.jpg"
-                    alt="HogarDIY.es"
-                    width={36}
-                    height={36}
-                    className="h-9 w-9 rounded-xl object-cover shadow-inner"
-                  />
+                  <svg
+                    viewBox="0 0 36 36"
+                    width="36"
+                    height="36"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="shrink-0 rounded-xl"
+                    aria-hidden="true"
+                  >
+                    <rect width="36" height="36" rx="8" fill="#0a2e16" />
+                    <polygon points="18,6 30,19 6,19" fill="#f59e0b" />
+                    <rect
+                      x="9"
+                      y="19"
+                      width="18"
+                      height="11"
+                      rx="1"
+                      fill="#f59e0b"
+                    />
+                    <rect
+                      x="14"
+                      y="22"
+                      width="8"
+                      height="8"
+                      rx="1"
+                      fill="#0a2e16"
+                    />
+                    <circle
+                      cx="26"
+                      cy="11"
+                      r="3"
+                      fill="none"
+                      stroke="#f59e0b"
+                      strokeWidth="2"
+                    />
+                    <line
+                      x1="28.1"
+                      y1="13.1"
+                      x2="31"
+                      y2="16"
+                      stroke="#f59e0b"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
                   <p className="text-lg font-extrabold">HogarDIY.es</p>
                 </div>
                 <p className="text-sm leading-relaxed text-white/60">
