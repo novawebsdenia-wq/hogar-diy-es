@@ -1,155 +1,29 @@
-'use client'
-
-import { useRef, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 
-const FRAME_COUNT = 192
-const FRAME_COUNT_MOBILE = 48   // 1 de cada 4 frames en móvil — misma duración, menos MB
-const FPS = 24
-
-function drawCover(
-  ctx: CanvasRenderingContext2D,
-  img: HTMLImageElement,
-  canvasW: number,
-  canvasH: number,
-) {
-  const imgAR = img.naturalWidth / img.naturalHeight
-  const canvasAR = canvasW / canvasH
-
-  let sx = 0, sy = 0, sw = img.naturalWidth, sh = img.naturalHeight
-
-  if (canvasAR > imgAR) {
-    // Canvas más ancho: ajustar por anchura, recortar altura
-    sh = img.naturalWidth / canvasAR
-    sy = (img.naturalHeight - sh) / 2
-  } else {
-    // Canvas más alto: ajustar por altura, recortar anchura
-    sw = img.naturalHeight * canvasAR
-    sx = (img.naturalWidth - sw) / 2
-  }
-
-  ctx.drawImage(img, sx, sy, sw, sh, 0, 0, canvasW, canvasH)
-}
-
 export function HeroVideoSection() {
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-  const totalFrames = isMobile ? FRAME_COUNT_MOBILE : FRAME_COUNT
-  // Stride: en móvil cargamos 1 de cada 4 frames del vídeo (0001, 0005, 0009...)
-  const frameStride = isMobile ? 4 : 1
-
-  const sectionRef        = useRef<HTMLDivElement>(null)
-  const canvasRef         = useRef<HTMLCanvasElement>(null)
-  const framesRef         = useRef<(HTMLImageElement | null)[]>(Array(FRAME_COUNT).fill(null))
-  const currentFrameRef   = useRef(0)
-  const isScrollingRef    = useRef(false)
-  const scrollTimerRef    = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const rafRef            = useRef<number | null>(null)
-  const firstFrameLoaded  = useRef(false)
-
-  // ── Dibujar frame en canvas ────────────────────────────────────────────────
-  const drawFrame = useCallback((index: number) => {
-    const canvas = canvasRef.current
-    const ctx    = canvas?.getContext('2d')
-    const frame  = framesRef.current[index]
-    if (!canvas || !ctx || !frame) return
-
-    drawCover(ctx, frame, canvas.width, canvas.height)
-    currentFrameRef.current = index
-  }, [])
-
-  // ── Loop de autoplay (requestAnimationFrame) ───────────────────────────────
-  const startAutoplay = useCallback(() => {
-    const interval = 1000 / FPS
-    let lastTime   = 0
-
-    const loop = (now: number) => {
-      rafRef.current = requestAnimationFrame(loop)
-      if (now - lastTime < interval) return
-      lastTime = now
-      
-      const next = (currentFrameRef.current + 1) % FRAME_COUNT
-      // Avanzar solo si el frame siguiente ya está cargado
-      if (framesRef.current[next]) {
-        drawFrame(next)
-      }
-    }
-
-    rafRef.current = requestAnimationFrame(loop)
-  }, [drawFrame])
-
-  // ── Precargar frames + resize canvas ──────────────────────────────────────
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const resize = () => {
-      canvas.width  = window.innerWidth
-      canvas.height = window.innerHeight
-      // Redibujar frame actual al cambiar tamaño
-      const frame = framesRef.current[currentFrameRef.current]
-      if (frame) {
-        const ctx = canvas.getContext('2d')
-        if (ctx) drawCover(ctx, frame, canvas.width, canvas.height)
-      }
-    }
-    resize()
-    window.addEventListener('resize', resize)
-
-    // Carga progresiva: primeros frames inmediatos, resto en background
-    // En móvil: stride=4, solo cargamos 1 de cada 4 frames (indices 0,4,8,12...)
-    const loadFrame = (realIndex: number) => {
-      if (framesRef.current[realIndex]) return
-      const img = new window.Image()
-      img.onload = () => {
-        framesRef.current[realIndex] = img
-        if (!firstFrameLoaded.current) {
-          firstFrameLoaded.current = true
-          drawFrame(0)
-          startAutoplay()
-        }
-      }
-      img.src = `/frames/frame-${String(realIndex + 1).padStart(4, '0')}.jpg`
-    }
-
-    // Construir lista de índices a cargar según dispositivo
-    const indicesToLoad: number[] = []
-    for (let i = 0; i < FRAME_COUNT; i += frameStride) indicesToLoad.push(i)
-
-    // Primer bloque: primeros 10 índices (carga inmediata)
-    for (let i = 0; i < Math.min(10, indicesToLoad.length); i++) loadFrame(indicesToLoad[i])
-
-    // Resto: en batches con pequeño delay
-    let batchStart = 10
-    const loadBatch = () => {
-      const batch = indicesToLoad.slice(batchStart, batchStart + 20)
-      batch.forEach(loadFrame)
-      batchStart += 20
-      if (batchStart < indicesToLoad.length) setTimeout(loadBatch, 50)
-    }
-    setTimeout(loadBatch, 80)
-
-    return () => {
-      window.removeEventListener('resize', resize)
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-    }
-  }, [drawFrame, startAutoplay])
-
   return (
-    <div ref={sectionRef} className="relative h-[90svh] min-h-[600px] w-full overflow-hidden bg-black">
+    <div className="relative h-[90svh] min-h-[600px] w-full overflow-hidden bg-black">
       <div className="absolute inset-0 h-full w-full">
+        {/* Video Nativo HTML5: Rendimiento máximo a 60 FPS independientemente del dispositivo */}
+        <video 
+          src="/hero-video.mp4" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 h-full w-full object-cover opacity-80"
+        />
 
-        {/* Canvas — frames pintados aquí */}
-        <canvas ref={canvasRef} className="absolute inset-0" />
-
-        {/* Overlay izquierda→derecha */}
+        {/* Overlay izquierda→derecha para legibilidad del texto */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d26]/95 via-[#0f3d26]/70 to-[#0f3d26]/20" />
+        
         {/* Fade inferior hacia la siguiente sección */}
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0f3d26] to-transparent" />
 
-        {/* Contenido */}
+        {/* Contenido Textual */}
         <div className="absolute inset-0 z-10 flex items-center">
           <div className="mx-auto w-full max-w-6xl px-4">
-            <div className="max-w-xl">
+            <div className="max-w-xl animate-in fade-in slide-in-from-bottom-6 duration-1000">
               <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-amber-500/20 px-3 py-1 text-xs font-bold text-amber-400">
                 🔧 Guías gratuitas de bricolaje
               </span>
@@ -161,16 +35,17 @@ export function HeroVideoSection() {
                 Guías paso a paso con fotos reales para fontanería, electricidad, herramientas y reformas.
                 Ahorra cientos de euros al año haciéndolo tú mismo.
               </p>
+              
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/reparaciones"
-                  className="rounded-xl bg-amber-500 px-6 py-3 font-bold text-white shadow-lg shadow-amber-900/30 transition-colors hover:bg-amber-600"
+                  className="rounded-xl bg-amber-500 px-6 py-3 font-bold text-white shadow-lg shadow-amber-900/30 transition-transform hover:scale-105 active:scale-95"
                 >
                   Ver guías →
                 </Link>
                 <Link
                   href="/sobre-nosotros"
-                  className="rounded-xl border border-white/20 px-6 py-3 font-medium text-white/80 transition-colors hover:border-white/40 hover:text-white"
+                  className="rounded-xl border border-white/20 px-6 py-3 font-medium text-white/80 transition-all hover:bg-white/10 hover:text-white active:scale-95"
                 >
                   Quiénes somos
                 </Link>
@@ -191,7 +66,6 @@ export function HeroVideoSection() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   )
