@@ -60,14 +60,6 @@ export function CategoryHero({ categorySlug, articlesImages, articlesCount }: Ca
   }
 
   const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end start']
-  })
-
-  // Efecto Parallax para el texto
-  const yText = useTransform(scrollYProgress, [0, 1], [0, 150])
-  const opacityText = useTransform(scrollYProgress, [0, 0.8], [1, 0])
 
   // Lógica para columnas de imágenes (Marquee vertical infinito)
   // Requerimos suficientes imágenes para que el efecto loop funcione bien.
@@ -142,9 +134,8 @@ export function CategoryHero({ categorySlug, articlesImages, articlesCount }: Ca
       
 
       {/* ── FOREGROUND CONTENT ── */}
-      <motion.div 
+      <div 
         className="relative z-10 flex h-full w-full items-center justify-center pt-10 pb-24"
-        style={{ y: yText, opacity: opacityText }}
       >
         <div className="mx-auto w-full max-w-5xl px-6 text-center">
           
@@ -183,7 +174,7 @@ export function CategoryHero({ categorySlug, articlesImages, articlesCount }: Ca
             </div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Fade inferior hacia la siguiente sección */}
       <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-zinc-50 via-zinc-50/80 to-transparent z-10 pointer-events-none" />

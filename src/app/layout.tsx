@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body>
+      <body className="overflow-x-hidden bg-gray-50 text-gray-900 antialiased selection:bg-amber-500/30">
         {GA_MEASUREMENT_ID && (
           <>
             <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="afterInteractive" />
@@ -84,15 +84,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
 
           {/* Category strip — mobile scroll */}
-          <div className="border-t border-white/10 md:hidden">
-            <div className="flex gap-1 overflow-x-auto px-4 py-2 scrollbar-none">
+          <div className="border-t border-white/10 md:hidden bg-[#0A2E16]">
+            <div className="flex gap-2.5 overflow-x-auto px-4 py-3 scrollbar-none snap-x snap-mandatory">
               {Object.entries(CATEGORIES).map(([slug, { label, emoji }]) => (
                 <Link
                   key={slug}
                   href={`/${slug}`}
-                  className="flex shrink-0 items-center gap-1 rounded-full border border-white/20 px-3 py-1 text-xs font-medium text-white/70 hover:border-white/40 hover:text-white"
+                  className="flex shrink-0 snap-start items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold text-white shadow-sm transition-all hover:bg-white/10 active:scale-95"
                 >
-                  {emoji} {label}
+                  <span className="text-base">{emoji}</span>
+                  {label}
                 </Link>
               ))}
             </div>
