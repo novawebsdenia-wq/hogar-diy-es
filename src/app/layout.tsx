@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 text-lg shadow-sm">🔧</span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#0a2e16] border border-white/10 text-xl shadow-inner">🔧</span>
               <div className="leading-tight">
                 <p className="text-base font-extrabold tracking-tight text-white">HogarDIY.es</p>
                 <p className="hidden text-[10px] font-medium text-white/50 sm:block">Guías para reparar tu hogar</p>
@@ -109,7 +109,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {/* Brand */}
               <div className="md:col-span-1">
                 <div className="mb-4 flex items-center gap-2.5">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 text-lg">🔧</span>
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#0a2e16] border border-white/10 text-xl shadow-inner">🔧</span>
                   <p className="text-lg font-extrabold">HogarDIY.es</p>
                 </div>
                 <p className="text-sm leading-relaxed text-white/60">

@@ -55,7 +55,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CATEGORIES ── */}
+      {/* ── CATEGORIES (Bento Grid) ── */}
       <section className="mx-auto max-w-6xl px-4 py-14">
         <div className="mb-8 flex items-end justify-between">
           <div>
@@ -64,23 +64,59 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {Object.entries(CATEGORIES).map(([slug, { label, description, emoji }]) => (
-            <Link
-              key={slug}
-              href={`/${slug}`}
-              className={`card-hover group flex flex-col gap-3 rounded-2xl border-l-4 bg-white p-5 shadow-sm ${CATEGORY_COLORS[slug] ?? 'border-gray-400 bg-gray-50'}`}
-            >
-              <span className="text-3xl">{emoji}</span>
-              <div>
-                <p className={`font-extrabold ${CATEGORY_TEXT[slug] ?? 'text-gray-700'}`}>{label}</p>
-                <p className="mt-0.5 text-xs leading-relaxed text-gray-500">{description}</p>
-              </div>
-              <p className={`mt-auto text-xs font-semibold ${CATEGORY_TEXT[slug] ?? 'text-gray-600'}`}>
-                Ver guías →
-              </p>
-            </Link>
-          ))}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+          {Object.entries(CATEGORIES).map(([slug, { label, description, emoji }], index) => {
+            // Bento asimétrico: Las dos primeras categorías ocupan 3 columnas en Desktop (mitad y mitad).
+            // Las demás (últimas 3) ocupan 2 columnas cada una (tercios).
+            const colSpan = index < 2 ? 'lg:col-span-3' : 'lg:col-span-2 sm:col-span-2'
+            // Obtenemos una portada representativa o un fallback
+            const coverImage = allArticles.find(a => a.category === slug && a.image)?.image || '/images/hero-bg.jpg'
+
+            return (
+              <Link
+                key={slug}
+                href={`/${slug}`}
+                className={`group relative flex flex-col justify-end overflow-hidden rounded-3xl border border-white/10 p-6 sm:p-8 min-h-[350px] lg:min-h-[320px] ${colSpan} shadow-sm hover:shadow-2xl transition-shadow`}
+              >
+                {/* Background Image Parallax */}
+                <Image
+                  src={coverImage}
+                  alt={`Fondo de ${label}`}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                
+                {/* Overlays Gradient (Protege el texto) */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0f3d26]/90 via-[#0f3d26]/40 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500" />
+
+                {/* Content */}
+                <div className="relative z-10 flex h-full flex-col">
+                  <div className="mb-auto">
+                    <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-3xl shadow-lg backdrop-blur-md border border-white/20 transition-colors duration-300 group-hover:bg-white/20">
+                      {emoji}
+                    </span>
+                  </div>
+                  
+                  <div className="mt-4">
+                    <h3 className="mb-2 text-2xl font-extrabold tracking-tight text-white md:text-3xl">
+                      {label}
+                    </h3>
+                    <p className="mb-5 text-sm font-medium leading-relaxed text-white/70 line-clamp-2 md:text-base">
+                      {description}
+                    </p>
+                    <span className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-amber-900/30 transition-transform duration-300 ease-out group-hover:translate-x-1 hover:bg-amber-400">
+                      Ver guías
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            )
+          })}
         </div>
       </section>
 

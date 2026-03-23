@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "framer-motion": "^12.38.0",
     "gray-matter": "^4.0.3",
     "next": "^15.3.0",
     "next-mdx-remote": "^6.0.0",

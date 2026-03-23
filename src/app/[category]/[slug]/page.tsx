@@ -194,24 +194,59 @@ export default async function ArticlePage({ params }: Props) {
 
             <AdBanner slot="bottom-article" />
 
-            {/* Bloque de autor */}
+            {/* Bloque de autor (Premium E-E-A-T) */}
             {author && (
-              <div className="mt-8 flex items-start gap-4 rounded-2xl border border-gray-200 bg-gray-50 p-5">
-                <Link href={`/autor/${author.slug}`} className="shrink-0">
+              <div className="mt-12 flex flex-col sm:flex-row items-start gap-6 rounded-3xl border border-amber-500/20 bg-gradient-to-br from-amber-50/50 to-white p-6 md:p-8 shadow-sm relative overflow-hidden">
+                {/* Ribbon o badge lateral */}
+                <div className="absolute right-0 top-0 h-16 w-16 overflow-hidden hidden sm:block">
+                  <div className="absolute left-[-10px] top-[14px] w-[170px] -rotate-45 transform bg-[#0f3d26] text-center text-[10px] font-bold uppercase tracking-widest text-white shadow-sm">
+                    Revisado
+                  </div>
+                </div>
+
+                <Link href={`/autor/${author.slug}`} className="shrink-0 relative">
                   <span
-                    className="flex h-12 w-12 items-center justify-center rounded-xl text-sm font-extrabold text-white shadow"
+                    className="flex h-20 w-20 items-center justify-center rounded-2xl text-2xl font-extrabold text-white shadow-xl shadow-[#1a6640]/20 ring-4 ring-white"
                     style={{ backgroundColor: author.color }}
                   >
                     {author.initials}
                   </span>
+                  <div className="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 text-white shadow-md border-2 border-white" title="Autor Verificado">
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
                 </Link>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Escrito por</p>
-                  <Link href={`/autor/${author.slug}`} className="font-extrabold text-gray-900 hover:text-[#1a6640]">
+
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <p className="text-xs font-bold uppercase tracking-widest text-[#0f3d26]">Autor</p>
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                    <p className="text-xs font-medium text-gray-500">Expertise Verificada</p>
+                  </div>
+                  <Link href={`/autor/${author.slug}`} className="text-2xl font-extrabold text-gray-900 hover:text-[#1a6640] transition-colors">
                     {author.name}
                   </Link>
-                  <p className="text-xs text-gray-500">{author.title}</p>
-                  <p className="mt-1 text-xs leading-relaxed text-gray-600 line-clamp-2">{author.bio}</p>
+                  <p className="text-sm font-semibold text-[#1a6640] mb-3">{author.title}</p>
+                  
+                  <p className="mb-4 text-sm leading-relaxed text-gray-700 italic border-l-2 border-amber-300 pl-4 bg-amber-50/30 py-2 rounded-r-lg">
+                    &quot;{author.bio}&quot;
+                  </p>
+
+                  {/* Mostramos credenciales para generar E-E-A-T puro */}
+                  {author.credentials && author.credentials.length > 0 && (
+                    <div className="flex flex-col gap-1.5 mt-4">
+                      <p className="text-xs font-bold text-gray-400 mb-1 uppercase tracking-wide">Credenciales de Confianza:</p>
+                      {author.credentials.slice(0, 3).map((cred, i) => (
+                        <div key={i} className="flex items-center gap-2 text-xs text-gray-600 font-medium">
+                          <svg className="h-3.5 w-3.5 text-green-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span>{cred}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             )}

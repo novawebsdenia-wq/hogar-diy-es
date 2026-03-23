@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getArticlesByCategory } from '@/lib/mdx'
 import { CATEGORIES, SITE_NAME } from '@/lib/constants'
+import { CategoryHero } from '@/components/CategoryHero'
 
 interface Props {
   params: Promise<{ category: string }>
@@ -37,38 +38,19 @@ export default async function CategoryPage({ params }: Props) {
   if (!cat) notFound()
 
   const articles = getArticlesByCategory(category)
-  const badgeClass = CATEGORY_BADGE[category] ?? 'bg-white/20 text-white'
+  const articlesImages = articles.map(a => a.image).filter(Boolean) as string[]
 
   return (
-    <div>
+    <div className="bg-zinc-50 min-h-screen">
       {/* Category hero */}
-      <div className="bg-[#0f3d26] py-14 text-white">
-        <div className="mx-auto max-w-6xl px-4">
-          <nav className="mb-5 text-sm text-white/50">
-            <Link href="/" className="hover:text-white">Inicio</Link>
-            <span className="mx-2">/</span>
-            <span className="text-white">{cat.label}</span>
-          </nav>
-          <div className="flex items-center gap-5">
-            <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 text-4xl shadow-lg backdrop-blur-sm">
-              {cat.emoji}
-            </span>
-            <div>
-              <span className={`mb-2 inline-block rounded-full px-3 py-1 text-xs font-bold ${badgeClass}`}>
-                {cat.label}
-              </span>
-              <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">{cat.label}</h1>
-              <p className="mt-1 text-white/70">{cat.description}</p>
-            </div>
-          </div>
-          <p className="mt-5 text-sm text-white/50">
-            {articles.length} {articles.length === 1 ? 'guía publicada' : 'guías publicadas'}
-          </p>
-        </div>
-      </div>
+      <CategoryHero 
+        categorySlug={category} 
+        articlesImages={articlesImages} 
+        articlesCount={articles.length} 
+      />
 
       {/* Articles */}
-      <div className="mx-auto max-w-6xl px-4 py-12">
+      <div className="relative z-20 mx-auto max-w-6xl px-4 -mt-24 pb-24">
         {articles.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-warm-300 p-16 text-center">
             <p className="text-3xl">🚧</p>
