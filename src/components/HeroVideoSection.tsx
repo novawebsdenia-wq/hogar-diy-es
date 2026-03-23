@@ -64,38 +64,17 @@ export function HeroVideoSection() {
 
     const loop = (now: number) => {
       rafRef.current = requestAnimationFrame(loop)
-      if (isScrollingRef.current) return          // el scroll tiene prioridad
       if (now - lastTime < interval) return
       lastTime = now
+      
       const next = (currentFrameRef.current + 1) % FRAME_COUNT
       // Avanzar solo si el frame siguiente ya está cargado
-      if (framesRef.current[next]) drawFrame(next)
+      if (framesRef.current[next]) {
+        drawFrame(next)
+      }
     }
 
     rafRef.current = requestAnimationFrame(loop)
-  }, [drawFrame])
-
-  // ── Scroll handler ─────────────────────────────────────────────────────────
-  useEffect(() => {
-    const onScroll = () => {
-      const section = sectionRef.current
-      if (!section) return
-
-      const scrollable = section.offsetHeight - window.innerHeight
-      const progress   = Math.max(0, Math.min(1, window.scrollY / scrollable))
-      const frameIndex = Math.round(progress * (totalFrames - 1)) * frameStride
-
-      isScrollingRef.current = true
-      drawFrame(frameIndex)
-
-      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current)
-      scrollTimerRef.current = setTimeout(() => {
-        isScrollingRef.current = false
-      }, 400)
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
   }, [drawFrame])
 
   // ── Precargar frames + resize canvas ──────────────────────────────────────
@@ -151,14 +130,13 @@ export function HeroVideoSection() {
 
     return () => {
       window.removeEventListener('resize', resize)
-      if (rafRef.current)    cancelAnimationFrame(rafRef.current)
-      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
   }, [drawFrame, startAutoplay])
 
   return (
-    <div ref={sectionRef} className="relative h-[200vh]">
-      <div className="sticky top-0 h-screen overflow-hidden">
+    <div ref={sectionRef} className="relative h-[90svh] min-h-[600px] w-full overflow-hidden bg-black">
+      <div className="absolute inset-0 h-full w-full">
 
         {/* Canvas — frames pintados aquí */}
         <canvas ref={canvasRef} className="absolute inset-0" />
@@ -214,11 +192,6 @@ export function HeroVideoSection() {
           </div>
         </div>
 
-        {/* Indicador de scroll */}
-        <div className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-2">
-          <span className="text-xs font-medium uppercase tracking-widest text-white/30">Scroll</span>
-          <div className="h-8 w-px animate-pulse bg-gradient-to-b from-white/30 to-transparent" />
-        </div>
       </div>
     </div>
   )
