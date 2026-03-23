@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { AUTHORS, getAuthor } from "@/lib/authors";
 import { getAllArticles } from "@/lib/mdx";
@@ -66,13 +67,23 @@ export default async function AutorPage({ params }: Props) {
           </nav>
 
           <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-            {/* Avatar con iniciales */}
-            <div
-              className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl text-2xl font-extrabold text-white shadow-lg"
-              style={{ backgroundColor: author.color }}
-            >
-              {author.initials}
-            </div>
+            {/* Avatar */}
+            {author.image ? (
+              <Image
+                src={author.image}
+                alt={author.name}
+                width={80}
+                height={80}
+                className="h-20 w-20 shrink-0 rounded-2xl object-cover shadow-lg ring-4 ring-white/20"
+              />
+            ) : (
+              <div
+                className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl text-2xl font-extrabold text-white shadow-lg"
+                style={{ backgroundColor: author.color }}
+              >
+                {author.initials}
+              </div>
+            )}
 
             <div>
               <p className="mb-1 text-xs font-bold uppercase tracking-widest text-amber-400">

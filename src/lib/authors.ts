@@ -6,6 +6,7 @@ export interface Author {
   credentials: string[];
   initials: string;
   color: string;
+  image?: string;
 }
 
 export const AUTHORS: Record<string, Author> = {
@@ -22,6 +23,7 @@ export const AUTHORS: Record<string, Author> = {
     ],
     initials: "CM",
     color: "#1a6640",
+    image: "/images/autores/carlos-martin.jpg",
   },
 };
 

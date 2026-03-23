@@ -164,12 +164,22 @@ export default async function ArticlePage({ params }: Props) {
                 href={`/autor/${author.slug}`}
                 className="flex items-center gap-2 group"
               >
-                <span
-                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-extrabold text-white transition-opacity group-hover:opacity-80"
-                  style={{ backgroundColor: author.color }}
-                >
-                  {author.initials}
-                </span>
+                {author.image ? (
+                  <Image
+                    src={author.image}
+                    alt={author.name}
+                    width={28}
+                    height={28}
+                    className="h-7 w-7 shrink-0 rounded-full object-cover transition-opacity group-hover:opacity-80"
+                  />
+                ) : (
+                  <span
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-extrabold text-white transition-opacity group-hover:opacity-80"
+                    style={{ backgroundColor: author.color }}
+                  >
+                    {author.initials}
+                  </span>
+                )}
                 <strong className="text-white/70 group-hover:text-white transition-colors">
                   {author.name}
                 </strong>
@@ -249,23 +259,26 @@ export default async function ArticlePage({ params }: Props) {
             {/* Bloque de autor (Premium E-E-A-T) */}
             {author && (
               <div className="mt-12 flex flex-col sm:flex-row items-start gap-6 rounded-3xl border border-amber-500/20 bg-gradient-to-br from-amber-50/50 to-white p-6 md:p-8 shadow-sm relative overflow-hidden">
-                {/* Ribbon o badge lateral */}
-                <div className="absolute right-0 top-0 h-16 w-16 overflow-hidden hidden sm:block">
-                  <div className="absolute left-[-10px] top-[14px] w-[170px] -rotate-45 transform bg-[#0f3d26] text-center text-[10px] font-bold uppercase tracking-widest text-white shadow-sm">
-                    Revisado
-                  </div>
-                </div>
-
                 <Link
                   href={`/autor/${author.slug}`}
                   className="shrink-0 relative"
                 >
-                  <span
-                    className="flex h-20 w-20 items-center justify-center rounded-2xl text-2xl font-extrabold text-white shadow-xl shadow-[#1a6640]/20 ring-4 ring-white"
-                    style={{ backgroundColor: author.color }}
-                  >
-                    {author.initials}
-                  </span>
+                  {author.image ? (
+                    <Image
+                      src={author.image}
+                      alt={author.name}
+                      width={80}
+                      height={80}
+                      className="h-20 w-20 rounded-2xl object-cover shadow-xl shadow-[#1a6640]/20 ring-4 ring-white"
+                    />
+                  ) : (
+                    <span
+                      className="flex h-20 w-20 items-center justify-center rounded-2xl text-2xl font-extrabold text-white shadow-xl shadow-[#1a6640]/20 ring-4 ring-white"
+                      style={{ backgroundColor: author.color }}
+                    >
+                      {author.initials}
+                    </span>
+                  )}
                   <div
                     className="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 text-white shadow-md border-2 border-white"
                     title="Autor Verificado"

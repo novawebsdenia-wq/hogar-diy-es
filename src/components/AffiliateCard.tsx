@@ -28,7 +28,7 @@ export function AffiliateCard({
     <div className="not-prose my-10 flex flex-col gap-6 overflow-hidden rounded-[2rem] border border-amber-500/20 bg-gradient-to-br from-white to-amber-50/50 p-6 md:p-8 shadow-sm sm:flex-row sm:items-center relative group hover:shadow-lg transition-shadow">
       {/* Etiqueta superior opcional (Recomendado) */}
       <div className="absolute top-0 left-0 bg-amber-500 text-white text-[10px] md:text-xs uppercase font-extrabold tracking-widest px-4 py-1.5 rounded-br-2xl shadow-sm z-10">
-        Recomendación de {name.includes("Taladro") ? "Carlos" : "Autor"}
+        Recomendado por Carlos Martín
       </div>
 
       {image ? (

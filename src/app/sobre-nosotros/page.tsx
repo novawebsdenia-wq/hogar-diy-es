@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { AUTHORS } from "@/lib/authors";
 
@@ -17,12 +18,22 @@ export default function SobreNosotrosPage() {
       {/* Hero personal */}
       <div className="mb-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
         <Link href={`/autor/${carlos.slug}`} className="shrink-0 group">
-          <span
-            className="flex h-20 w-20 items-center justify-center rounded-2xl text-2xl font-extrabold text-white shadow-lg transition-opacity group-hover:opacity-80"
-            style={{ backgroundColor: carlos.color }}
-          >
-            {carlos.initials}
-          </span>
+          {carlos.image ? (
+            <Image
+              src={carlos.image}
+              alt={carlos.name}
+              width={80}
+              height={80}
+              className="h-20 w-20 rounded-2xl object-cover shadow-lg transition-opacity group-hover:opacity-80"
+            />
+          ) : (
+            <span
+              className="flex h-20 w-20 items-center justify-center rounded-2xl text-2xl font-extrabold text-white shadow-lg transition-opacity group-hover:opacity-80"
+              style={{ backgroundColor: carlos.color }}
+            >
+              {carlos.initials}
+            </span>
+          )}
         </Link>
         <div>
           <p className="mb-1 text-xs font-bold uppercase tracking-widest text-amber-600">
