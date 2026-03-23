@@ -5,7 +5,7 @@ export const SITE_DESCRIPTION =
 export const SITE_AUTHOR = 'HogarDIY.es'
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID ?? ''
 export const ADSENSE_PUBLISHER_ID = process.env.NEXT_PUBLIC_ADSENSE_ID ?? ''
-export const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? 'hogardiy-21'
+export const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? 'vivesaludab09-21'
 
 export const CATEGORIES: Record<string, { label: string; description: string; emoji: string }> = {
   reparaciones: {
