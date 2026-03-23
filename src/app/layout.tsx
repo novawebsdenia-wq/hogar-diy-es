@@ -79,48 +79,35 @@ export default function RootLayout({
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0">
               <svg
-                viewBox="0 0 36 36"
+                viewBox="0 0 100 100"
                 width="36"
                 height="36"
                 xmlns="http://www.w3.org/2000/svg"
                 className="shrink-0 rounded-xl"
                 aria-hidden="true"
               >
-                <rect width="36" height="36" rx="8" fill="#0a2e16" />
-                <polygon points="18,6 30,19 6,19" fill="#f59e0b" />
+                <rect width="100" height="100" rx="16" fill="#f2f0eb" />
+                <path
+                  d="M50,16 L86,47 L86,88 Q86,92 82,92 L18,92 Q14,92 14,88 L14,47 Z"
+                  fill="#1c5c3a"
+                />
                 <rect
-                  x="9"
-                  y="19"
-                  width="18"
-                  height="11"
+                  x="68"
+                  y="30"
+                  width="8"
+                  height="20"
                   rx="1"
+                  fill="#0d3020"
+                />
+                <path
+                  d="M64,10 L64,28 Q64,35 72,35 Q80,35 80,28 L80,10 L76,10 L76,26 Q76,31 72,31 Q68,31 68,26 L68,10 Z"
                   fill="#f59e0b"
                 />
-                <rect
-                  x="14"
-                  y="22"
-                  width="8"
-                  height="8"
-                  rx="1"
-                  fill="#0a2e16"
+                <path
+                  d="M42,92 L42,68 Q42,57 50,57 Q58,57 58,68 L58,92 Z"
+                  fill="#f59e0b"
                 />
-                <circle
-                  cx="26"
-                  cy="11"
-                  r="3"
-                  fill="none"
-                  stroke="#f59e0b"
-                  strokeWidth="2"
-                />
-                <line
-                  x1="28.1"
-                  y1="13.1"
-                  x2="31"
-                  y2="16"
-                  stroke="#f59e0b"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
+                <circle cx="44.5" cy="76" r="2" fill="#0d3020" />
               </svg>
               <div className="leading-tight">
                 <p className="text-base font-extrabold tracking-tight text-white">
@@ -185,48 +172,35 @@ export default function RootLayout({
               <div className="md:col-span-1">
                 <div className="mb-4 flex items-center gap-2.5">
                   <svg
-                    viewBox="0 0 36 36"
+                    viewBox="0 0 100 100"
                     width="36"
                     height="36"
                     xmlns="http://www.w3.org/2000/svg"
                     className="shrink-0 rounded-xl"
                     aria-hidden="true"
                   >
-                    <rect width="36" height="36" rx="8" fill="#0a2e16" />
-                    <polygon points="18,6 30,19 6,19" fill="#f59e0b" />
+                    <rect width="100" height="100" rx="16" fill="#f2f0eb" />
+                    <path
+                      d="M50,16 L86,47 L86,88 Q86,92 82,92 L18,92 Q14,92 14,88 L14,47 Z"
+                      fill="#1c5c3a"
+                    />
                     <rect
-                      x="9"
-                      y="19"
-                      width="18"
-                      height="11"
+                      x="68"
+                      y="30"
+                      width="8"
+                      height="20"
                       rx="1"
+                      fill="#0d3020"
+                    />
+                    <path
+                      d="M64,10 L64,28 Q64,35 72,35 Q80,35 80,28 L80,10 L76,10 L76,26 Q76,31 72,31 Q68,31 68,26 L68,10 Z"
                       fill="#f59e0b"
                     />
-                    <rect
-                      x="14"
-                      y="22"
-                      width="8"
-                      height="8"
-                      rx="1"
-                      fill="#0a2e16"
+                    <path
+                      d="M42,92 L42,68 Q42,57 50,57 Q58,57 58,68 L58,92 Z"
+                      fill="#f59e0b"
                     />
-                    <circle
-                      cx="26"
-                      cy="11"
-                      r="3"
-                      fill="none"
-                      stroke="#f59e0b"
-                      strokeWidth="2"
-                    />
-                    <line
-                      x1="28.1"
-                      y1="13.1"
-                      x2="31"
-                      y2="16"
-                      stroke="#f59e0b"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
+                    <circle cx="44.5" cy="76" r="2" fill="#0d3020" />
                   </svg>
                   <p className="text-lg font-extrabold">HogarDIY.es</p>
                 </div>
