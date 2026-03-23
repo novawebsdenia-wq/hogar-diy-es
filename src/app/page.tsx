@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { getAllArticles, type ArticleMeta } from '@/lib/mdx'
 import { CATEGORIES, SITE_NAME, SITE_DESCRIPTION } from '@/lib/constants'
 import { NewsletterForm } from '@/components/NewsletterForm'
+import { HeroVideoSection } from '@/components/HeroVideoSection'
 
 export const metadata: Metadata = {
   title: `${SITE_NAME} — Bricolaje y Reparaciones del Hogar`,
@@ -28,101 +29,12 @@ const CATEGORY_TEXT: Record<string, string> = {
 
 export default function HomePage() {
   const allArticles = getAllArticles()
-  const featured = allArticles[0]
-  const rest = allArticles.slice(1, 7)
+  const rest = allArticles.slice(0, 7)
 
   return (
     <>
-      {/* ── HERO ── */}
-      <section className="bg-[#0f3d26]">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-          <div className="grid items-center gap-10 md:grid-cols-2">
-
-            {/* Left: copy */}
-            <div>
-              <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-amber-500/20 px-3 py-1 text-xs font-bold text-amber-400">
-                🔧 Guías gratuitas de bricolaje
-              </span>
-              <h1 className="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl">
-                Repara tu hogar<br />
-                <span className="text-amber-400">sin llamar al técnico</span>
-              </h1>
-              <p className="mb-8 text-lg leading-relaxed text-white/70">
-                Guías paso a paso con fotos reales para fontanería, electricidad, herramientas y reformas.
-                Ahorra cientos de euros al año haciéndolo tú mismo.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/reparaciones"
-                  className="rounded-xl bg-amber-500 px-6 py-3 font-bold text-white shadow-lg shadow-amber-900/30 transition-colors hover:bg-amber-600"
-                >
-                  Ver guías →
-                </Link>
-                <Link
-                  href="/sobre-nosotros"
-                  className="rounded-xl border border-white/20 px-6 py-3 font-medium text-white/80 transition-colors hover:border-white/40 hover:text-white"
-                >
-                  Quiénes somos
-                </Link>
-              </div>
-
-              {/* Stats */}
-              <div className="mt-10 flex flex-wrap gap-6 border-t border-white/10 pt-8">
-                {[
-                  { n: '5+', label: 'Categorías' },
-                  { n: '100%', label: 'Gratis' },
-                  { n: '0€', label: 'Sin registro' },
-                ].map(({ n, label }) => (
-                  <div key={label}>
-                    <p className="text-2xl font-extrabold text-amber-400">{n}</p>
-                    <p className="text-sm text-white/50">{label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right: featured article */}
-            {featured && (
-              <Link href={`/${featured.category}/${featured.slug}`} className="group block">
-                <div className="overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/30">
-                  {featured.image ? (
-                    <div className="relative h-56 w-full overflow-hidden">
-                      <Image
-                        src={featured.image}
-                        alt={featured.title}
-                        fill
-                        priority
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                      <span className="absolute left-4 top-4 rounded-full bg-amber-500 px-3 py-1 text-xs font-bold text-white">
-                        Artículo destacado
-                      </span>
-                    </div>
-                  ) : (
-                    <div className="flex h-56 items-center justify-center bg-amber-50 text-6xl">
-                      {CATEGORIES[featured.category]?.emoji}
-                    </div>
-                  )}
-                  <div className="p-6">
-                    <span className={`mb-2 inline-block text-xs font-bold uppercase tracking-wide ${CATEGORY_TEXT[featured.category] ?? 'text-green-700'}`}>
-                      {CATEGORIES[featured.category]?.label}
-                    </span>
-                    <h2 className="mb-2 text-xl font-extrabold leading-snug text-gray-900 group-hover:text-[#1a6640]">
-                      {featured.title}
-                    </h2>
-                    <p className="line-clamp-2 text-sm text-gray-500">{featured.description}</p>
-                    <p className="mt-4 text-sm font-semibold text-amber-600 group-hover:text-amber-700">
-                      Leer guía → {featured.readingTime} min
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            )}
-          </div>
-        </div>
-      </section>
+      {/* ── HERO — vídeo scroll-driven ── */}
+      <HeroVideoSection />
 
       {/* ── TRUST STRIP ── */}
       <section className="border-b border-warm-200 bg-amber-50">
@@ -193,13 +105,30 @@ export default function HomePage() {
       )}
 
       {/* ── NEWSLETTER ── */}
-      <section className="bg-[#0f3d26] py-14">
+      <section id="newsletter" className="bg-[#0f3d26] py-14">
         <div className="mx-auto max-w-2xl px-4 text-center">
-          <p className="mb-2 text-xs font-bold uppercase tracking-widest text-amber-400">Newsletter gratuito</p>
-          <h2 className="mb-3 text-2xl font-extrabold text-white">Nuevas guías en tu bandeja de entrada</h2>
-          <p className="mb-8 text-white/60">Sin spam. Solo cuando publiquemos algo nuevo. Cancela cuando quieras.</p>
+          <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-amber-500/20 px-3 py-1 text-xs font-bold text-amber-400">
+            🔧 Gratis · Sin spam
+          </span>
+          <h2 className="mb-3 text-2xl font-extrabold text-white md:text-3xl">
+            La próxima reparación que evites<br />
+            <span className="text-amber-400">empieza aquí</span>
+          </h2>
+          <p className="mb-2 text-white/60">
+            Cada semana, una guía práctica de bricolaje directamente en tu bandeja de entrada.
+            El tipo de contenido que te ahorra 60-300€ por reparación.
+          </p>
+          <div className="mb-8 flex flex-wrap justify-center gap-4 text-sm text-white/40">
+            <span>✓ Sin tecnicismos</span>
+            <span>✓ Materiales con precio</span>
+            <span>✓ Tiempo estimado real</span>
+          </div>
           <NewsletterForm />
-          <p className="mt-4 text-xs text-white/30">Al suscribirte aceptas nuestra política de privacidad.</p>
+          <p className="mt-4 text-xs text-white/30">
+            Al suscribirte aceptas nuestra{' '}
+            <a href="/politica-privacidad" className="underline hover:text-white/50">política de privacidad</a>.
+            Cancela cuando quieras.
+          </p>
         </div>
       </section>
 

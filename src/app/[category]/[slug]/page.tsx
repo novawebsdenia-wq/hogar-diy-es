@@ -8,11 +8,14 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import remarkGfm from 'remark-gfm'
 import { getArticle, getAllArticles, getRelatedArticles } from '@/lib/mdx'
 import { CATEGORIES, SITE_NAME, SITE_URL } from '@/lib/constants'
+import { getAuthor } from '@/lib/authors'
 import { TableOfContents } from '@/components/TableOfContents'
 import { extractHeadings } from '@/lib/headings'
 import { AdBanner } from '@/components/AdBanner'
 import { AffiliateCard } from '@/components/AffiliateCard'
 import { ArticleSchema } from '@/components/ArticleSchema'
+import { NewsletterMidCTA } from '@/components/NewsletterMidCTA'
+import { FAQSchema } from '@/components/FAQSchema'
 
 interface Props {
   params: Promise<{ category: string; slug: string }>
@@ -65,6 +68,21 @@ export default async function ArticlePage({ params }: Props) {
   const related = getRelatedArticles(article)
   const headings = extractHeadings(article.content)
   const isHowTo = article.title.toLowerCase().includes('cómo')
+  const author = getAuthor(article.author)
+
+  // Extraer FAQs del contenido MDX (sección "## Preguntas frecuentes")
+  const faqItems = (() => {
+    const faqMatch = article.content.match(/##\s*Preguntas frecuentes\n([\s\S]*)$/)
+    if (!faqMatch) return []
+    const faqBlock = faqMatch[1]
+    const pairs: { q: string; a: string }[] = []
+    const qRegex = /\*\*(.+?)\*\*\n([\s\S]+?)(?=\n\*\*|\n---|\n##|$)/g
+    let m: RegExpExecArray | null
+    while ((m = qRegex.exec(faqBlock)) !== null) {
+      pairs.push({ q: m[1].trim(), a: m[2].trim() })
+    }
+    return pairs
+  })()
 
   const formattedDate = new Date(article.date).toLocaleDateString('es-ES', {
     year: 'numeric',
@@ -72,9 +90,24 @@ export default async function ArticlePage({ params }: Props) {
     day: 'numeric',
   })
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: cat?.label ?? category, item: `${SITE_URL}/${category}` },
+      { '@type': 'ListItem', position: 3, name: article.title, item: `${SITE_URL}/${category}/${slug}` },
+    ],
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <ArticleSchema article={article} isHowTo={isHowTo} />
+      {faqItems.length > 0 && <FAQSchema items={faqItems} />}
 
       {/* Article hero */}
       <div className="bg-[#0f3d26] py-10 text-white">
@@ -102,7 +135,19 @@ export default async function ArticlePage({ params }: Props) {
           <p className="mb-5 text-lg text-white/70">{article.description}</p>
 
           <div className="flex flex-wrap items-center gap-3 text-sm text-white/40">
-            <span>Por <strong className="text-white/70">{article.author}</strong></span>
+            {author ? (
+              <Link href={`/autor/${author.slug}`} className="flex items-center gap-2 group">
+                <span
+                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-extrabold text-white transition-opacity group-hover:opacity-80"
+                  style={{ backgroundColor: author.color }}
+                >
+                  {author.initials}
+                </span>
+                <strong className="text-white/70 group-hover:text-white transition-colors">{author.name}</strong>
+              </Link>
+            ) : (
+              <span>Por <strong className="text-white/70">{article.author}</strong></span>
+            )}
             <span>·</span>
             <time dateTime={article.date}>{formattedDate}</time>
             {article.updated && article.updated !== article.date && (
@@ -132,6 +177,8 @@ export default async function ArticlePage({ params }: Props) {
 
             <AdBanner slot="top-article" />
 
+            <NewsletterMidCTA />
+
             <div className="prose-hogar">
               <MDXRemote
                 source={article.content}
@@ -146,6 +193,28 @@ export default async function ArticlePage({ params }: Props) {
             </div>
 
             <AdBanner slot="bottom-article" />
+
+            {/* Bloque de autor */}
+            {author && (
+              <div className="mt-8 flex items-start gap-4 rounded-2xl border border-gray-200 bg-gray-50 p-5">
+                <Link href={`/autor/${author.slug}`} className="shrink-0">
+                  <span
+                    className="flex h-12 w-12 items-center justify-center rounded-xl text-sm font-extrabold text-white shadow"
+                    style={{ backgroundColor: author.color }}
+                  >
+                    {author.initials}
+                  </span>
+                </Link>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Escrito por</p>
+                  <Link href={`/autor/${author.slug}`} className="font-extrabold text-gray-900 hover:text-[#1a6640]">
+                    {author.name}
+                  </Link>
+                  <p className="text-xs text-gray-500">{author.title}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-gray-600 line-clamp-2">{author.bio}</p>
+                </div>
+              </div>
+            )}
 
             <div className="mt-8 flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4">
               <span className="text-xl">ℹ️</span>

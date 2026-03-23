@@ -4,3 +4,6 @@ node_modules/
 .env
 *.tsbuildinfo
 out/
+.vercel
+.qa-reports/
+public/hero-video-original.mp4
