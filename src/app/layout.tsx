@@ -34,8 +34,12 @@ export const metadata: Metadata = {
   category: "home improvement",
   alternates: { canonical: SITE_URL },
   icons: {
-    icon: "/images/logo-icon.jpg",
-    apple: "/images/logo-icon.jpg",
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/images/logo-icon.jpg", type: "image/jpeg" },
+    ],
+    apple: "/favicon.png",
+    shortcut: "/favicon.png",
   },
   openGraph: {
     type: "website",
