@@ -2,7 +2,7 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hogardiy.es";
 export const SITE_NAME = "HogarDIY.es";
 export const SITE_DESCRIPTION =
-  "Ahorra cientos de euros arreglando tu casa tú mismo. Descubre guías paso a paso de bricolaje, tutoriales fáciles y herramientas imprescindibles. ¡Empieza hoy!";
+  "Arregla tu casa sin fontanero ni electricista. Guías paso a paso probadas por Carlos Martín, técnico con 15 años de experiencia. Ahorra 60-300€ por reparación.";
 export const SITE_AUTHOR = "HogarDIY.es";
 export const GA_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA_ID ?? "G-BNL1M6YHE9";
@@ -16,31 +16,31 @@ export const CATEGORIES: Record<
   reparaciones: {
     label: "Reparaciones",
     description:
-      "Fontanería, electricidad, puertas, ventanas y más reparaciones del hogar.",
+      "Arregla grifos, cisternas, persianas, enchufes e interruptores sin llamar al técnico. Guías con fotos reales y ahorro garantizado en cada reparación.",
     emoji: "🔧",
   },
   herramientas: {
     label: "Herramientas",
     description:
-      "Reviews, comparativas y guías de compra de herramientas para el hogar.",
+      "¿Qué taladro comprar? ¿Vale la pena la sierra caladora? Comparativas honestas y guías de compra para no malgastar dinero en herramientas que no usarás.",
     emoji: "🪛",
   },
   reformas: {
     label: "Reformas",
     description:
-      "Pintura, suelos, muebles y reformas low-cost para transformar tu hogar.",
+      "Pinta tu casa, instala suelo vinílico o alisa el gotelé este fin de semana. Reformas low-cost con resultado profesional y sin albañil.",
     emoji: "🏠",
   },
   jardin: {
     label: "Jardín",
     description:
-      "Mantenimiento de jardín, herramientas de jardinería y sistemas de riego.",
+      "Monta tu riego automático, construye una jardinera o aprende a cortar el césped bien. Guías prácticas para un jardín cuidado sin jardinero.",
     emoji: "🌱",
   },
   "ahorro-energetico": {
     label: "Ahorro Energético",
     description:
-      "Aislamiento, termostatos y mejoras para reducir tu factura de la luz.",
+      "Sella ventanas, instala válvulas termoestáticas o aísla la caja de la persiana. Pequeñas mejoras que pueden bajar tu factura del gas un 15-30%.",
     emoji: "💡",
   },
 };
