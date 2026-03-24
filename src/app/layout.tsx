@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import Link from "next/link";
 import Image from "next/image";
 import "@/styles/globals.css";
@@ -7,12 +6,11 @@ import {
   SITE_NAME,
   SITE_DESCRIPTION,
   SITE_URL,
-  GA_MEASUREMENT_ID,
-  ADSENSE_PUBLISHER_ID,
   CATEGORIES,
 } from "@/lib/constants";
 import { MobileMenu } from "@/components/MobileMenu";
 import { CookieBanner } from "@/components/CookieBanner";
+import { AnalyticsScripts } from "@/components/AnalyticsScripts";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -62,26 +60,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="overflow-x-hidden bg-gray-50 text-gray-900 antialiased selection:bg-amber-500/30">
-        {GA_MEASUREMENT_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script
-              id="gtag-init"
-              strategy="afterInteractive"
-            >{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`}</Script>
-          </>
-        )}
-        {ADSENSE_PUBLISHER_ID && (
-          <Script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
-            crossOrigin="anonymous"
-            strategy="lazyOnload"
-          />
-        )}
+        <AnalyticsScripts />
 
         <script
           type="application/ld+json"
