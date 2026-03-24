@@ -23,7 +23,7 @@ export const AUTHORS: Record<string, Author> = {
     ],
     initials: "CM",
     color: "#1a6640",
-    image: "/images/autores/carlos-martin.jpg",
+    image: "/images/authors/carlos-martin.png",
   },
 };
 

@@ -5,7 +5,7 @@ interface Props {
   name: string;
   image?: string;
   price?: string;
-  link: string;
+  link?: string;
   description?: string;
   badge?: string;
 }
@@ -18,11 +18,11 @@ export function AffiliateCard({
   description,
   badge,
 }: Props) {
-  // Ensure Amazon tag is appended
-  const url =
-    link.includes("amazon.es") && !link.includes("tag=")
+  const url = link
+    ? link.includes("amazon.es") && !link.includes("tag=")
       ? `${link}${link.includes("?") ? "&" : "?"}tag=${AMAZON_TAG}`
-      : link;
+      : link
+    : null;
 
   return (
     <div className="not-prose my-10 flex flex-col gap-6 overflow-hidden rounded-[2rem] border border-amber-500/20 bg-gradient-to-br from-white to-amber-50/50 p-6 md:p-8 shadow-sm sm:flex-row sm:items-center relative group hover:shadow-lg transition-shadow">
@@ -68,32 +68,34 @@ export function AffiliateCard({
         )}
       </div>
 
-      <div className="flex flex-col gap-2 shrink-0 w-full sm:w-auto mt-4 sm:mt-0 items-center justify-center">
-        <a
-          href={url}
-          target="_blank"
-          rel="nofollow noopener noreferrer sponsored"
-          className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl bg-amber-500 px-8 py-4 text-sm md:text-base font-black text-[#0f3d26] shadow-md shadow-amber-500/20 transition-all hover:bg-amber-400 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/30 ring-2 ring-white"
-        >
-          Ver en Amazon
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      {url && (
+        <div className="flex flex-col gap-2 shrink-0 w-full sm:w-auto mt-4 sm:mt-0 items-center justify-center">
+          <a
+            href={url}
+            target="_blank"
+            rel="nofollow noopener noreferrer sponsored"
+            className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl bg-amber-500 px-8 py-4 text-sm md:text-base font-black text-[#0f3d26] shadow-md shadow-amber-500/20 transition-all hover:bg-amber-400 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/30 ring-2 ring-white"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2.5}
-              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-            />
-          </svg>
-        </a>
-        <p className="text-center text-[10px] font-bold text-gray-400 tracking-wider">
-          * Enlace de Afiliado Seguro
-        </p>
-      </div>
+            Ver en Amazon
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2.5}
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          </a>
+          <p className="text-center text-[10px] font-bold text-gray-400 tracking-wider">
+            * Enlace de Afiliado Seguro
+          </p>
+        </div>
+      )}
     </div>
   );
 }

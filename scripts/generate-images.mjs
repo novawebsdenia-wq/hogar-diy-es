@@ -203,11 +203,13 @@ function insertToolImages(content, cards, category, slug) {
 
 // ─── Main ──────────────────────────────────────────────────────────────────
 
+const COVERS_ONLY = process.env.COVERS_ONLY === "true";
+
 async function processArticle(category, slug, filePath) {
   const content = readFileSync(filePath, "utf-8");
   const fm = parseFrontmatter(content);
-  const steps = extractSteps(content);
-  const cards = extractAffiliateCards(content);
+  const steps = COVERS_ONLY ? [] : extractSteps(content);
+  const cards = COVERS_ONLY ? [] : extractAffiliateCards(content);
 
   const imageDir = join(PUBLIC_IMAGES, category, slug);
   mkdirSync(imageDir, { recursive: true });
@@ -315,9 +317,18 @@ async function processArticle(category, slug, filePath) {
 }
 
 async function main() {
+  const categoryFilter = process.env.CATEGORY ?? null;
   console.log("🏠 HogarDIY.es — Generador de Imágenes con Gemini Imagen 3\n");
+  if (categoryFilter)
+    console.log(`   Filtrando por categoría: ${categoryFilter}`);
+  if (COVERS_ONLY) console.log(`   Modo: solo portadas\n`);
 
-  const categories = readdirSync(CONTENT_DIR).filter((c) => !c.startsWith("."));
+  const allCategories = readdirSync(CONTENT_DIR).filter(
+    (c) => !c.startsWith("."),
+  );
+  const categories = categoryFilter
+    ? allCategories.filter((c) => c === categoryFilter)
+    : allCategories;
 
   let totalGenerated = 0;
   let totalSkipped = 0;
