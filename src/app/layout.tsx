@@ -12,6 +12,7 @@ import {
   CATEGORIES,
 } from "@/lib/constants";
 import { MobileMenu } from "@/components/MobileMenu";
+import { CookieBanner } from "@/components/CookieBanner";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -166,6 +167,8 @@ export default function RootLayout({
 
         <main className="min-h-[calc(100vh-64px)]">{children}</main>
 
+        <CookieBanner />
+
         {/* Footer */}
         <footer className="mt-20 bg-[#0f3d26] text-white">
           <div className="mx-auto max-w-6xl px-4 py-14">
@@ -249,6 +252,22 @@ export default function RootLayout({
                       className="transition-colors hover:text-white"
                     >
                       Política de Privacidad
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/politica-cookies"
+                      className="transition-colors hover:text-white"
+                    >
+                      Política de Cookies
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/aviso-legal"
+                      className="transition-colors hover:text-white"
+                    >
+                      Aviso Legal
                     </Link>
                   </li>
                 </ul>

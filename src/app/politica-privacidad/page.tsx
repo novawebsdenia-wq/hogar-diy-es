@@ -4,7 +4,7 @@ import { SITE_NAME, SITE_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: `Política de Privacidad | ${SITE_NAME}`,
   description: "Política de privacidad y cookies de HogarDIY.es.",
-  robots: { index: false },
+  robots: { index: true, follow: false },
 };
 
 export default function PoliticaPrivacidadPage() {
