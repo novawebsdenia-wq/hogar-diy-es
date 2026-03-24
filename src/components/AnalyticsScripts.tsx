@@ -4,6 +4,13 @@ import { useState, useEffect } from "react";
 import Script from "next/script";
 import { GA_MEASUREMENT_ID, ADSENSE_PUBLISHER_ID } from "@/lib/constants";
 
+declare global {
+  interface Window {
+    dataLayer: unknown[];
+    gtag: (...args: unknown[]) => void;
+  }
+}
+
 export function AnalyticsScripts() {
   const [consent, setConsent] = useState(false);
 
@@ -19,6 +26,17 @@ export function AnalyticsScripts() {
     return () =>
       window.removeEventListener("cookie_consent_change", handleConsent);
   }, []);
+
+  // Consent Mode v2: notify Google when consent is granted
+  useEffect(() => {
+    if (!consent || typeof window.gtag !== "function") return;
+    window.gtag("consent", "update", {
+      analytics_storage: "granted",
+      ad_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted",
+    });
+  }, [consent]);
 
   if (!consent) return null;
 
