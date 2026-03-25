@@ -11,6 +11,7 @@ import {
 import { MobileMenu } from "@/components/MobileMenu";
 import { CookieBanner } from "@/components/CookieBanner";
 import { AnalyticsScripts } from "@/components/AnalyticsScripts";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -166,6 +167,7 @@ export default function RootLayout({
         <main className="min-h-[calc(100vh-64px)]">{children}</main>
 
         <CookieBanner />
+        <Analytics />
 
         {/* Footer */}
         <footer className="mt-20 bg-[#0f3d26] text-white">
