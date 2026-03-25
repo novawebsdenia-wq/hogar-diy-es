@@ -7,6 +7,7 @@ import {
   SITE_DESCRIPTION,
   SITE_URL,
   CATEGORIES,
+  ADSENSE_PUBLISHER_ID,
 } from "@/lib/constants";
 import { MobileMenu } from "@/components/MobileMenu";
 import { CookieBanner } from "@/components/CookieBanner";
@@ -49,6 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
+  other: { "google-adsense-account": ADSENSE_PUBLISHER_ID },
   ...(process.env.NEXT_PUBLIC_GSC_VERIFICATION && {
     verification: { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION },
   }),
