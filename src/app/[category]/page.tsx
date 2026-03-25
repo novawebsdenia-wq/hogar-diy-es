@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cat = CATEGORIES[category];
   if (!cat) return {};
   return {
-    title: `${cat.label} | ${SITE_NAME}`,
+    title: `${cat.titleSeo} | ${SITE_NAME}`,
     description: cat.description,
   };
 }
