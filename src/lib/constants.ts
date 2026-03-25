@@ -7,7 +7,8 @@ export const SITE_DESCRIPTION =
 export const SITE_AUTHOR = "HogarDIY.es";
 export const GA_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA_ID ?? "G-BNL1M6YHE9";
-export const ADSENSE_PUBLISHER_ID = process.env.NEXT_PUBLIC_ADSENSE_ID ?? "";
+export const ADSENSE_PUBLISHER_ID =
+  process.env.NEXT_PUBLIC_ADSENSE_ID ?? "ca-pub-7451904814874802";
 export const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? "hogardiyes-21";
 
 export const CATEGORIES: Record<
