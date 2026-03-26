@@ -165,7 +165,7 @@ export default function RootLayout({
           </div>
 
           {/* Category strip — mobile scroll */}
-          <div className="border-t border-white/10 md:hidden bg-[#0A2E16]">
+          <div className="relative border-t border-white/10 md:hidden bg-[#0A2E16] after:pointer-events-none after:absolute after:right-0 after:top-0 after:h-full after:w-8 after:bg-gradient-to-r after:from-transparent after:to-[#0A2E16]">
             <div className="flex gap-2.5 overflow-x-auto px-4 py-3 scrollbar-none snap-x snap-mandatory">
               {Object.entries(CATEGORIES).map(([slug, { label, emoji }]) => (
                 <Link
