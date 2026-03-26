@@ -136,8 +136,24 @@ export default function RootLayout({
               ))}
             </nav>
 
-            {/* CTA + Mobile */}
+            {/* CTA + Search + Mobile */}
             <div className="flex items-center gap-2">
+              <Link
+                href="/buscar"
+                aria-label="Buscar guías"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
+                </svg>
+              </Link>
               <Link
                 href="#newsletter"
                 className="hidden rounded-xl bg-amber-500 px-4 py-2 text-sm font-bold text-white shadow-sm transition-colors hover:bg-amber-600 md:block"
