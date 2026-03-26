@@ -328,7 +328,7 @@ export default function RootLayout({
                     </svg>
                   </a>
                   <a
-                    href="https://www.facebook.com/profile.php?id=61578801945154"
+                    href="https://www.facebook.com/profile.php?id=61578450762997"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="HogarDIY en Facebook"
