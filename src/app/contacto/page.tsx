@@ -17,7 +17,7 @@ export default function ContactoPage() {
       </p>
 
       <form
-        action="https://formsubmit.co/tu@email.com"
+        action="https://formsubmit.co/hogardiyinfo@gmail.com"
         method="POST"
         className="flex flex-col gap-4"
       >
