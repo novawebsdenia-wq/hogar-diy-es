@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { getArticlesByCategory } from "@/lib/mdx";
-import { CATEGORIES, SITE_NAME } from "@/lib/constants";
+import { CATEGORIES, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { CategoryHero } from "@/components/CategoryHero";
 
 interface Props {
@@ -29,6 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${cat.titleSeo} | ${SITE_NAME}`,
     description: cat.description,
+    alternates: { canonical: `${SITE_URL}/${category}` },
   };
 }
 
