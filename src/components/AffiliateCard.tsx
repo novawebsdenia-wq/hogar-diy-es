@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { AMAZON_TAG } from "@/lib/constants";
 
@@ -74,9 +76,13 @@ export function AffiliateCard({
             href={url}
             target="_blank"
             rel="nofollow noopener noreferrer sponsored"
+            onClick={() =>
+              typeof window.gtag === "function" &&
+              window.gtag("event", "affiliate_click", { product_name: name })
+            }
             className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl bg-amber-500 px-8 py-4 text-sm md:text-base font-black text-[#0f3d26] shadow-md shadow-amber-500/20 transition-all hover:bg-amber-400 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/30 ring-2 ring-white"
           >
-            Ver en Amazon
+            Ver precio actual en Amazon
             <svg
               className="w-5 h-5"
               fill="none"

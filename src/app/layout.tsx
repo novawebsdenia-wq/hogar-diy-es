@@ -391,12 +391,22 @@ export default function RootLayout({
               </div>
             </div>
 
-            <div className="mt-10 border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/30">
-              <p>
-                © {new Date().getFullYear()} HogarDIY.es — Todos los derechos
-                reservados
+            <div className="mt-10 border-t border-white/10 pt-8">
+              <p className="mb-6 text-xs leading-relaxed text-white/25 text-center max-w-3xl mx-auto">
+                <strong className="text-white/35">Aviso de seguridad:</strong>{" "}
+                El contenido de HogarDIY.es tiene carácter informativo y
+                divulgativo. Antes de realizar cualquier trabajo eléctrico,
+                estructural o con gas, consulta a un profesional cualificado.
+                HogarDIY.es no se hace responsable de daños derivados del uso de
+                la información publicada.
               </p>
-              <p>Hecho con 🔧 en España</p>
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/30">
+                <p>
+                  © {new Date().getFullYear()} HogarDIY.es — Todos los derechos
+                  reservados
+                </p>
+                <p>Hecho con 🔧 en España</p>
+              </div>
             </div>
           </div>
         </footer>
