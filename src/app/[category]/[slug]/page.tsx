@@ -16,6 +16,7 @@ import { AffiliateCard } from "@/components/AffiliateCard";
 import { ArticleSchema } from "@/components/ArticleSchema";
 import { NewsletterMidCTA } from "@/components/NewsletterMidCTA";
 import { FAQSchema } from "@/components/FAQSchema";
+import { GuiaRecomendada } from "@/components/GuiaRecomendada";
 
 interface Props {
   params: Promise<{ category: string; slug: string }>;
@@ -58,6 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const MDX_COMPONENTS = {
   AffiliateCard,
   AdBanner,
+  GuiaRecomendada,
 };
 
 export default async function ArticlePage({ params }: Props) {
