@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Script from "next/script";
-import { GA_MEASUREMENT_ID, ADSENSE_PUBLISHER_ID } from "@/lib/constants";
+import { GA_MEASUREMENT_ID } from "@/lib/constants";
 
 declare global {
   interface Window {
@@ -55,14 +55,6 @@ export function AnalyticsScripts() {
             gtag('config','${GA_MEASUREMENT_ID}');
           `}</Script>
         </>
-      )}
-      {ADSENSE_PUBLISHER_ID && (
-        <Script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
-        />
       )}
     </>
   );
