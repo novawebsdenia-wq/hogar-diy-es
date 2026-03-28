@@ -82,6 +82,10 @@ export default function RootLayout({
           }}
         />
 
+        <Script id="register-sw" strategy="afterInteractive">
+          {`if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');`}
+        </Script>
+
         {ADSENSE_PUBLISHER_ID && (
           <Script
             async
