@@ -41,6 +41,7 @@ export function AffiliateCard({
             fill
             className="object-contain p-2"
             sizes="128px"
+            unoptimized={image.startsWith("http")}
           />
         </div>
       ) : (
