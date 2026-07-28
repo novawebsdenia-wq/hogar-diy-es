@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    // Cuota de Image Optimization agotada en la cuenta: un 402 en /_next/image
+    // deja la imagen ROTA en produccion, no degradada. Los originales de /public
+    // se han reprocesado (168 MB -> 25 MB, ninguno pasa de 270 KB), asi que se
+    // sirven directos sin pasar por el optimizador. Cero transformaciones.
+    // Para reactivar la optimizacion basta con quitar esta linea.
+    unoptimized: true,
     formats: ["image/webp", "image/avif"],
     remotePatterns: [
       {
