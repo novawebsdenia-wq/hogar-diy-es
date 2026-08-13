@@ -7,3 +7,9 @@ out/
 .vercel
 .qa-reports/
 public/hero-video-original.mp4
+
+# basura de macOS y grafo generado
+.DS_Store
+**/.DS_Store
+graphify-out/
+.graphifyignore
