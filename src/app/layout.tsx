@@ -419,7 +419,12 @@ export default function RootLayout({
                   © {new Date().getFullYear()} HogarDIY.es — Todos los derechos
                   reservados
                 </p>
-                <p>Hecho con 🔧 en España</p>
+                <p>
+                  Hecho con 🔧 en España · Diseño web:{" "}
+                  <a href="https://novawebs.eu/" className="hover:text-white">
+                    Novawebs
+                  </a>
+                </p>
               </div>
             </div>
           </div>
